@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tanishcreation.lovable.app/sitemap.xml
+Sitemap: https://tanishcreation.com/sitemap.xml
