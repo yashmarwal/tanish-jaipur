@@ -61,7 +61,7 @@ function BlogPost() {
 
       <div className="max-w-3xl mx-auto px-6 lg:px-10 py-16">
         <div className="prose-lg space-y-6 text-lg text-foreground/85 leading-relaxed">
-          {post.body.map((para, i) => (
+          {post.body.map((para: string, i: number) => (
             <p key={i} className={i === 0 ? "first-letter:font-display first-letter:text-6xl first-letter:text-accent first-letter:float-left first-letter:mr-3 first-letter:leading-none" : ""}>
               {para}
             </p>
