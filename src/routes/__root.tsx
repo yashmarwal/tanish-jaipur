@@ -6,7 +6,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SmoothScroll from "@/components/SmoothScroll";
 import ExitIntent from "@/components/ExitIntent";
 
-const SITE_URL = "https://tanishcreation.com";
+const SITE_URL = "https://tanishcreation.lovable.app";
 
 const JSON_LD = {
   "@context": "https://schema.org",
