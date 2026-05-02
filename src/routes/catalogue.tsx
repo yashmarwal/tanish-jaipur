@@ -5,7 +5,7 @@ export const Route = createFileRoute("/catalogue")({
   head: () => ({
     meta: [
       { title: "Catalogue — 2000+ Screen Print Fabric Designs | Tanish Creation" },
-      { name: "description", content: "Browse 2000+ screen printed fabric designs across floral, paisley, jaal, botanical, animal and minimal categories. Bulk orders from 100m at ₹65/m." },
+      { name: "description", content: "Browse 2000+ screen printed fabric designs across floral, paisley, jaal, botanical, animal and minimal categories. Bulk orders from 100 metres." },
       { property: "og:title", content: "Catalogue — 2000+ Designs | Tanish Creation" },
       { property: "og:description", content: "Browse our full design archive. Floral, paisley, jaal, and more." },
     ],

@@ -63,12 +63,19 @@ export default function CatalogueGrid() {
                 onClick={() => setSelected(d)}
                 className="group text-left bg-card border border-border rounded-2xl overflow-hidden hover:shadow-warm hover:-translate-y-1 transition-all"
               >
-                <div className={`aspect-square ${d.patternClass} group-hover:scale-105 transition-transform duration-500`} />
+                <div className="aspect-square overflow-hidden bg-muted">
+                  <img
+                    src={d.imageUrl}
+                    alt={`${d.name} — ${d.category} screen printed fabric design`}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
                 <div className="p-4">
                   <h3 className="font-display text-lg text-primary truncate">{d.name}</h3>
                   <div className="mt-1 flex items-center justify-between text-xs">
-                    <span className="text-foreground/60">Min {d.minMetres}m</span>
-                    <span className="text-accent font-semibold">From ₹{d.pricePerMetre}/m</span>
+                    <span className="text-foreground/60">{d.category}</span>
+                    <span className="text-accent font-semibold">Min {d.minMetres}m</span>
                   </div>
                 </div>
               </button>
@@ -98,7 +105,12 @@ export default function CatalogueGrid() {
             className="bg-card rounded-3xl max-w-2xl w-full overflow-hidden shadow-warm"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={`aspect-[16/9] ${selected.patternClass} relative`}>
+            <div className="aspect-[16/9] relative bg-muted overflow-hidden">
+              <img
+                src={selected.imageUrlLarge}
+                alt={`${selected.name} — ${selected.category} screen printed fabric design`}
+                className="w-full h-full object-cover"
+              />
               <button
                 onClick={() => setSelected(null)}
                 className="absolute top-4 right-4 bg-card/90 rounded-full p-2 hover:bg-card"
@@ -117,7 +129,7 @@ export default function CatalogueGrid() {
               <dl className="mt-6 grid grid-cols-3 gap-4 text-sm">
                 <div><dt className="text-foreground/50 text-xs uppercase">Code</dt><dd className="font-mono text-primary">{selected.id}</dd></div>
                 <div><dt className="text-foreground/50 text-xs uppercase">Min Order</dt><dd className="text-primary">{selected.minMetres} m</dd></div>
-                <div><dt className="text-foreground/50 text-xs uppercase">Price</dt><dd className="text-accent font-semibold">₹{selected.pricePerMetre}/m</dd></div>
+                <div><dt className="text-foreground/50 text-xs uppercase">Category</dt><dd className="text-primary">{selected.category}</dd></div>
               </dl>
               <a
                 href={designInquiry(selected.name)}
@@ -125,7 +137,7 @@ export default function CatalogueGrid() {
                 rel="noreferrer"
                 className="mt-8 inline-flex w-full justify-center items-center gap-2 bg-accent text-accent-foreground px-6 py-4 rounded-full font-medium hover:bg-accent/90 transition-all"
               >
-                Order on WhatsApp →
+                Inquire on WhatsApp →
               </a>
             </div>
           </div>
