@@ -23,7 +23,6 @@ const JSON_LD = {
     addressCountry: "IN",
   },
   sameAs: ["https://www.instagram.com/tanishcreation.co"],
-  priceRange: "₹₹",
   foundingDate: "1959",
 };
 
@@ -52,7 +51,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Tanish Creation | Screen Printing Manufacturer Jaipur" },
-      { name: "description", content: "Jaipur-based premium screen printing fabric manufacturer. 2000+ designs, bulk orders from 100m, ₹65/m. 65+ years of heritage." },
+      { name: "description", content: "Jaipur-based premium screen printing fabric manufacturer. 2000+ designs, bulk orders from 100 metres. 65+ years of heritage." },
       { name: "keywords", content: "screen printing Jaipur, fabric printing manufacturer India, bulk fabric printing, Sanganer prints, screen print fabric supplier" },
       { name: "author", content: "Tanish Creation" },
       { property: "og:title", content: "Tanish Creation | Screen Printing Manufacturer Jaipur" },
