@@ -1,18 +1,8 @@
-import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 
-export default function Hero() {
-  const rootRef = useRef<HTMLDivElement>(null);
+const WORD_DELAYS = ["0ms", "120ms", "260ms", "400ms"];
 
-  useEffect(() => {
-    if (!rootRef.current) return;
-    const root = rootRef.current;
-    const words = root.querySelectorAll<HTMLElement>("[data-reveal-word]");
-    words.forEach((w, i) => {
-      w.style.transitionDelay = `${i * 90}ms`;
-      requestAnimationFrame(() => w.classList.add("is-in"));
-    });
-  }, []);
+export default function Hero() {
 
   return (
     <section
