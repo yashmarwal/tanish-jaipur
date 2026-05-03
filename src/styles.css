@@ -128,6 +128,41 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* Hero text reveal */
+  .reveal-line { display: inline-block; overflow: hidden; padding-bottom: 0.05em; }
+  .reveal-word {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;
+    will-change: transform, opacity;
+  }
+  .reveal-word.is-in { transform: translateY(0); opacity: 1; }
+
+  /* Shimmer text effect — subtle gold sweep */
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      var(--color-primary) 0%,
+      var(--color-accent) 45%,
+      oklch(0.78 0.16 60) 50%,
+      var(--color-accent) 55%,
+      var(--color-primary) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
   /* Decorative pattern primitives for catalogue cards */
   .pat-floral-1 {
     background-color: oklch(0.92 0.04 70);

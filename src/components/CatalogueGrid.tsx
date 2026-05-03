@@ -1,18 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { CATEGORIES, Category, generateDesigns, Design } from "@/lib/catalogue";
+import { useEffect, useMemo, useState } from "react";
+import { generateDesigns, Design } from "@/lib/catalogue";
 import { designInquiry, waLink } from "@/lib/whatsapp";
 import { X } from "lucide-react";
 
 export default function CatalogueGrid() {
-  const allDesigns = useMemo(() => generateDesigns(110), []);
-  const [filter, setFilter] = useState<Category | "All">("All");
+  const designs = useMemo(() => generateDesigns(90), []);
   const [selected, setSelected] = useState<Design | null>(null);
-  const filterRef = useRef<HTMLDivElement>(null);
-
-  const filtered = useMemo(
-    () => (filter === "All" ? allDesigns : allDesigns.filter((d) => d.category === filter)),
-    [filter, allDesigns]
-  );
 
   useEffect(() => {
     if (!selected) return;
@@ -23,41 +16,23 @@ export default function CatalogueGrid() {
 
   return (
     <div className="bg-background">
-      {/* Filters */}
-      <div ref={filterRef} className="sticky top-16 lg:top-20 z-30 bg-background/90 backdrop-blur-md border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex gap-2 overflow-x-auto no-scrollbar">
-          {(["All", ...CATEGORIES, "Custom"] as const).map((c) => (
-            <button
-              key={c}
-              onClick={() => c !== "Custom" && setFilter(c as Category | "All")}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-                c === "Custom"
-                  ? "bg-accent text-accent-foreground border-accent hover:scale-105"
-                  : filter === c
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-card text-foreground/70 border-border hover:border-accent"
-              }`}
-            >
-              {c === "Custom" ? (
-                <a href={waLink("Hi Tanish Creation! I'd like a custom design.")} target="_blank" rel="noreferrer">
-                  + Custom
-                </a>
-              ) : (
-                c
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
-        <p className="text-sm text-foreground/60 mb-6">
-          Showing <span className="text-accent font-medium">{filtered.length}</span> of 2000+ designs
-          {filter !== "All" && <> in <span className="text-primary">{filter}</span></>}
-        </p>
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+          <p className="text-sm text-foreground/60">
+            Showing <span className="text-accent font-medium">{designs.length}</span> hand-picked designs from our archive
+          </p>
+          <a
+            href={waLink("Hi Tanish Creation! I'd like to discuss a custom design.")}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm bg-accent text-accent-foreground px-5 py-2.5 rounded-full hover:scale-105 transition-transform"
+          >
+            + Custom Design
+          </a>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {filtered.map((d, idx) => (
+          {designs.map((d, idx) => (
             <div key={d.id} className="contents">
               <button
                 onClick={() => setSelected(d)}
@@ -66,7 +41,7 @@ export default function CatalogueGrid() {
                 <div className="aspect-square overflow-hidden bg-muted">
                   <img
                     src={d.imageUrl}
-                    alt={`${d.name} — ${d.category} screen printed fabric design`}
+                    alt={`${d.name} — screen printed fabric design by Tanish Creation`}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -74,7 +49,7 @@ export default function CatalogueGrid() {
                 <div className="p-4">
                   <h3 className="font-display text-lg text-primary truncate">{d.name}</h3>
                   <div className="mt-1 flex items-center justify-between text-xs">
-                    <span className="text-foreground/60">{d.category}</span>
+                    <span className="text-foreground/60 font-mono">{d.id}</span>
                     <span className="text-accent font-semibold">Min {d.minMetres}m</span>
                   </div>
                 </div>
@@ -95,7 +70,6 @@ export default function CatalogueGrid() {
         </div>
       </div>
 
-      {/* Modal */}
       {selected && (
         <div
           className="fixed inset-0 z-50 bg-primary/70 backdrop-blur-sm flex items-center justify-center p-4 fade-up"
@@ -105,10 +79,10 @@ export default function CatalogueGrid() {
             className="bg-card rounded-3xl max-w-2xl w-full overflow-hidden shadow-warm"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="aspect-[16/9] relative bg-muted overflow-hidden">
+            <div className="aspect-[4/3] relative bg-muted overflow-hidden">
               <img
                 src={selected.imageUrlLarge}
-                alt={`${selected.name} — ${selected.category} screen printed fabric design`}
+                alt={`${selected.name} — screen printed fabric design`}
                 className="w-full h-full object-cover"
               />
               <button
@@ -120,16 +94,15 @@ export default function CatalogueGrid() {
               </button>
             </div>
             <div className="p-8">
-              <p className="text-xs uppercase tracking-[0.3em] text-accent">{selected.category}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-accent">Design</p>
               <h3 className="font-display text-4xl text-primary mt-2">{selected.name}</h3>
               <p className="mt-4 text-foreground/70">
                 Hand-pulled screen print on premium base fabric. Custom colourways available.
                 Lead time 7–10 days for orders above 100 metres.
               </p>
-              <dl className="mt-6 grid grid-cols-3 gap-4 text-sm">
+              <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
                 <div><dt className="text-foreground/50 text-xs uppercase">Code</dt><dd className="font-mono text-primary">{selected.id}</dd></div>
                 <div><dt className="text-foreground/50 text-xs uppercase">Min Order</dt><dd className="text-primary">{selected.minMetres} m</dd></div>
-                <div><dt className="text-foreground/50 text-xs uppercase">Category</dt><dd className="text-primary">{selected.category}</dd></div>
               </dl>
               <a
                 href={designInquiry(selected.name)}
