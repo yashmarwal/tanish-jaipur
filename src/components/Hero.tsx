@@ -1,24 +1,11 @@
-import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 
-export default function Hero() {
-  const rootRef = useRef<HTMLDivElement>(null);
+const WORD_DELAYS = ["0ms", "120ms", "260ms", "400ms"];
 
-  useEffect(() => {
-    if (!rootRef.current) return;
-    const root = rootRef.current;
-    const words = root.querySelectorAll<HTMLElement>("[data-reveal-word]");
-    words.forEach((w, i) => {
-      w.style.transitionDelay = `${i * 90}ms`;
-      requestAnimationFrame(() => w.classList.add("is-in"));
-    });
-  }, []);
+export default function Hero() {
 
   return (
-    <section
-      ref={rootRef}
-      className="relative min-h-[92vh] overflow-hidden pt-20 bg-background"
-    >
+    <section className="relative min-h-[92vh] overflow-hidden pt-20 bg-background">
       {/* Rajasthani fabric background — subtle, behind everything */}
       <div
         aria-hidden
@@ -39,13 +26,13 @@ export default function Hero() {
 
           <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl text-primary leading-[0.95] text-balance">
             <span className="reveal-line">
-              <span data-reveal-word className="reveal-word">Where</span>{" "}
-              <span data-reveal-word className="reveal-word text-accent italic">Fabric</span>
+              <span className="reveal-word" style={{ animationDelay: WORD_DELAYS[0] }}>Where</span>{" "}
+              <span className="reveal-word text-accent italic" style={{ animationDelay: WORD_DELAYS[1] }}>Fabric</span>
             </span>
             <br />
             <span className="reveal-line">
-              <span data-reveal-word className="reveal-word">Meets</span>{" "}
-              <span data-reveal-word className="reveal-word italic shimmer-text">Art</span>
+              <span className="reveal-word" style={{ animationDelay: WORD_DELAYS[2] }}>Meets</span>{" "}
+              <span className="reveal-word italic shimmer-text" style={{ animationDelay: WORD_DELAYS[3] }}>Art</span>
             </span>
           </h1>
 
