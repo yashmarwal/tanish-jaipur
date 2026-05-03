@@ -17,11 +17,7 @@ export default function CatalogueGrid() {
   return (
     <div className="bg-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <p className="text-sm text-foreground/60">
-            Showing <span className="text-accent font-medium">{designs.length}</span> hand-picked
-            designs from our archive
-          </p>
+        <div className="flex flex-wrap items-end justify-end gap-4 mb-8">
           <a
             href={waLink("Hi Tanish Creation! I'd like to discuss a custom design.")}
             target="_blank"
