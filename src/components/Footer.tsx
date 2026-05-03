@@ -15,8 +15,8 @@ export default function Footer() {
             Printing Stories on Every Fabric
           </p>
           <p className="mt-6 text-sm text-primary-foreground/70 max-w-md">
-            Jaipur-based premium screen printing manufacturer. Heritage craft,
-            modern scale, trusted by boutiques and D2C brands across India.
+            Jaipur-based premium screen printing manufacturer. Heritage craft, modern scale, trusted
+            by boutiques and D2C brands across India.
           </p>
           <p className="mt-6 text-xs text-primary-foreground/60">
             GST: <span className="font-mono text-accent">{GST}</span>
@@ -26,21 +26,59 @@ export default function Footer() {
         <div>
           <h4 className="font-display text-lg mb-4 text-accent">Explore</h4>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
-            <li><Link to="/about" className="hover:text-accent">About</Link></li>
-            <li><Link to="/catalogue" className="hover:text-accent">Catalogue</Link></li>
-            <li><Link to="/blog" className="hover:text-accent">Journal</Link></li>
-            <li><Link to="/factory-visit" className="hover:text-accent">Factory Visit</Link></li>
-            <li><Link to="/contact" className="hover:text-accent">Contact</Link></li>
+            <li>
+              <Link to="/about" className="hover:text-accent">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/catalogue" className="hover:text-accent">
+                Catalogue
+              </Link>
+            </li>
+            <li>
+              <Link to="/blog" className="hover:text-accent">
+                Journal
+              </Link>
+            </li>
+            <li>
+              <Link to="/factory-visit" className="hover:text-accent">
+                Factory Visit
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-accent">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-display text-lg mb-4 text-accent">Reach Us</h4>
           <ul className="space-y-3 text-sm text-primary-foreground/80">
-            <li className="flex items-start gap-2"><Phone size={14} className="mt-1" /><a href={waLink("Hello!")} className="hover:text-accent">{PHONE_DISPLAY}</a></li>
-            <li className="flex items-start gap-2"><Mail size={14} className="mt-1" /><a href={`mailto:${EMAIL}`} className="hover:text-accent break-all">{EMAIL}</a></li>
-            <li className="flex items-start gap-2"><MapPin size={14} className="mt-1" />Jaipur, Rajasthan, India</li>
-            <li className="flex items-start gap-2"><Instagram size={14} className="mt-1" /><a href={INSTAGRAM} target="_blank" rel="noreferrer" className="hover:text-accent">@tanishcreation.co</a></li>
+            <li className="flex items-start gap-2">
+              <Phone size={14} className="mt-1" />
+              <a href={waLink("Hello!")} className="hover:text-accent">
+                {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li className="flex items-start gap-2">
+              <Mail size={14} className="mt-1" />
+              <a href={`mailto:${EMAIL}`} className="hover:text-accent break-all">
+                {EMAIL}
+              </a>
+            </li>
+            <li className="flex items-start gap-2">
+              <MapPin size={14} className="mt-1 shrink-0" />
+              <span>Ward no 36 saipura sanganer jaipur behind the homeopathic university</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Instagram size={14} className="mt-1" />
+              <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="hover:text-accent">
+                @tanishcreation.co
+              </a>
+            </li>
           </ul>
         </div>
       </div>

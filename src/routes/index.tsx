@@ -31,8 +31,8 @@ function Index() {
               Come see how your fabric is made.
             </h2>
             <p className="mt-6 text-foreground/70 text-lg max-w-md">
-              Walk our Sanganer floor, meet the printers behind your order, and
-              pick your base fabric on the spot. Visits are free and scheduled around you.
+              Walk our Sanganer floor, meet the printers behind your order, and pick your base
+              fabric on the spot. Visits are free and scheduled around you.
             </p>
           </div>
           <FactoryVisitForm />

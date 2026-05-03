@@ -7,9 +7,16 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Tanish Creation — 65 Years of Jaipur Screen Printing" },
-      { name: "description", content: "Three generations of Sanganer screen printing heritage. Meet the team, the craft, and the values behind Tanish Creation." },
+      {
+        name: "description",
+        content:
+          "Three generations of Sanganer screen printing heritage. Meet the team, the craft, and the values behind Tanish Creation.",
+      },
       { property: "og:title", content: "About Tanish Creation" },
-      { property: "og:description", content: "Three generations of Sanganer screen printing heritage in Jaipur." },
+      {
+        property: "og:description",
+        content: "Three generations of Sanganer screen printing heritage in Jaipur.",
+      },
     ],
   }),
   component: AboutPage,
@@ -25,8 +32,8 @@ function AboutPage() {
             Heritage you can <em className="text-accent">feel</em>.
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-2xl mx-auto">
-            From a single block-printing table in Sanganer to one of Jaipur's most
-            trusted screen printing facilities — this is who we are.
+            From a single block-printing table in Sanganer to one of Jaipur's most trusted screen
+            printing facilities — this is who we are.
           </p>
         </div>
       </section>

@@ -19,7 +19,8 @@ export default function CatalogueGrid() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <p className="text-sm text-foreground/60">
-            Showing <span className="text-accent font-medium">{designs.length}</span> hand-picked designs from our archive
+            Showing <span className="text-accent font-medium">{designs.length}</span> hand-picked
+            designs from our archive
           </p>
           <a
             href={waLink("Hi Tanish Creation! I'd like to discuss a custom design.")}
@@ -62,7 +63,9 @@ export default function CatalogueGrid() {
                   className="bg-gradient-warm text-accent-foreground rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform"
                 >
                   <p className="font-display text-2xl leading-tight">Custom Design Available</p>
-                  <span className="text-sm mt-4 underline underline-offset-4">Start on WhatsApp →</span>
+                  <span className="text-sm mt-4 underline underline-offset-4">
+                    Start on WhatsApp →
+                  </span>
                 </a>
               )}
             </div>
@@ -97,12 +100,18 @@ export default function CatalogueGrid() {
               <p className="text-xs uppercase tracking-[0.3em] text-accent">Design</p>
               <h3 className="font-display text-4xl text-primary mt-2">{selected.name}</h3>
               <p className="mt-4 text-foreground/70">
-                Hand-pulled screen print on premium base fabric. Custom colourways available.
-                Lead time 7–10 days for orders above 100 metres.
+                Screen print on premium base fabric. Custom colourways available. Lead
+                time 7–10 days for orders above 100 metres.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                <div><dt className="text-foreground/50 text-xs uppercase">Code</dt><dd className="font-mono text-primary">{selected.id}</dd></div>
-                <div><dt className="text-foreground/50 text-xs uppercase">Min Order</dt><dd className="text-primary">{selected.minMetres} m</dd></div>
+                <div>
+                  <dt className="text-foreground/50 text-xs uppercase">Code</dt>
+                  <dd className="font-mono text-primary">{selected.id}</dd>
+                </div>
+                <div>
+                  <dt className="text-foreground/50 text-xs uppercase">Min Order</dt>
+                  <dd className="text-primary">{selected.minMetres} m</dd>
+                </div>
               </dl>
               <a
                 href={designInquiry(selected.name)}

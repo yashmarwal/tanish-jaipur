@@ -1,19 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-const POSTS = [
-  { slug: "art-of-screen-printing", title: "The Art of Screen Printing", excerpt: "How a 2000-year-old craft still beats digital printing on hand-feel and depth.", category: "Craft" },
-  { slug: "why-jaipur-textile-capital", title: "Why Jaipur is India's Textile Capital", excerpt: "From Sanganer dye-pits to global D2C brands — the Jaipur story.", category: "Heritage" },
-  { slug: "choosing-right-fabric", title: "Choosing the Right Fabric for Print", excerpt: "Cotton, rayon, linen, silk — a buyer's guide to fabric for screen printing.", category: "Guide" },
-  { slug: "manufacturing-process", title: "Inside Our Manufacturing Process", excerpt: "From design approval to dispatch — a full walkthrough of how your order is made.", category: "Process" },
-];
+import { POSTS } from "@/lib/posts";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Journal — Stories from a Jaipur Print House | Tanish Creation" },
-      { name: "description", content: "Notes on screen printing, fabric, Sanganer heritage, and bulk manufacturing from Tanish Creation." },
+      {
+        name: "description",
+        content:
+          "Notes on screen printing, fabric, Sanganer heritage, and bulk manufacturing from Tanish Creation.",
+      },
       { property: "og:title", content: "The Tanish Creation Journal" },
-      { property: "og:description", content: "Notes on screen printing, fabric, and Sanganer heritage." },
+      {
+        property: "og:description",
+        content: "Notes on screen printing, fabric, and Sanganer heritage.",
+      },
     ],
   }),
   component: BlogIndex,
@@ -35,7 +37,14 @@ function BlogIndex() {
               params={{ slug: p.slug }}
               className="group bg-card border border-border rounded-3xl overflow-hidden hover:shadow-warm transition-all"
             >
-              <div className={`aspect-[16/9] ${["pat-floral-1","pat-paisley","pat-leaf","pat-jaal"][i % 4]} group-hover:scale-105 transition-transform duration-700`} />
+              <div className="aspect-[16/9] overflow-hidden relative">
+                <img
+                  src={p.coverImage}
+                  alt={p.title}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+              </div>
               <div className="p-7">
                 <div className="text-xs uppercase tracking-wider text-accent">{p.category}</div>
                 <h2 className="font-display text-3xl text-primary mt-2 group-hover:text-accent transition-colors">

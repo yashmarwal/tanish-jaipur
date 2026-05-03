@@ -56,13 +56,13 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href={waLink("Hi Tanish Creation! I'd like to know more about your fabrics.")}
+            href={waLink("Hi Tanish Creation! I would like to ask for a sample fabric for a quality check.")}
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium hover:bg-accent/90 shadow-soft transition-all hover:scale-105"
+            className="hidden lg:inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium hover:bg-accent/90 shadow-soft transition-all hover:scale-105"
           >
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            WhatsApp
+            Ask for a sample fabric for quality check
           </a>
           <button
             className="lg:hidden p-2 text-primary"

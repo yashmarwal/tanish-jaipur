@@ -6,7 +6,11 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact Tanish Creation — Jaipur Screen Printing Manufacturer" },
-      { name: "description", content: "Reach our Jaipur team for bulk fabric printing, custom designs, or a factory visit. Call, email, or WhatsApp us." },
+      {
+        name: "description",
+        content:
+          "Reach our Jaipur team for bulk fabric printing, custom designs, or a factory visit. Call, email, or WhatsApp us.",
+      },
       { property: "og:title", content: "Contact Tanish Creation" },
       { property: "og:description", content: "Reach our Jaipur team for bulk fabric printing." },
     ],
@@ -20,7 +24,7 @@ function Contact() {
     { I: MessageCircle, k: "WhatsApp", v: PHONE_DISPLAY, href: waLink("Hi Tanish Creation!") },
     { I: Mail, k: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
     { I: Instagram, k: "Instagram", v: "@tanishcreation.co", href: INSTAGRAM },
-    { I: MapPin, k: "Location", v: "Jaipur, Rajasthan, India" },
+    { I: MapPin, k: "Location", v: "Ward no 36 saipura sanganer jaipur behind the homeopathic university" },
   ];
   return (
     <section className="pt-32 lg:pt-44 pb-24 bg-gradient-cream">
@@ -44,7 +48,14 @@ function Contact() {
               </div>
             );
             return it.href ? (
-              <a key={it.k} href={it.href} target={it.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{Inner}</a>
+              <a
+                key={it.k}
+                href={it.href}
+                target={it.href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+              >
+                {Inner}
+              </a>
             ) : (
               <div key={it.k}>{Inner}</div>
             );

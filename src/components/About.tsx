@@ -23,18 +23,17 @@ export default function About() {
           </h2>
           <div className="mt-8 space-y-5 text-foreground/75 text-lg leading-relaxed">
             <p>
-              Tanish Creation began in the printing lanes of Sanganer in 1959 — a
-              region where every household once carried a wooden block and a
-              dye-stained dupatta hung from every roof.
+              Tanish Creation began in the printing lanes of Sanganer in 1959 — a region where every
+              household once carried a wooden block and a dye-stained dupatta hung from every roof.
             </p>
             <p>
-              Today we run one of Jaipur's most trusted screen printing facilities:
-              a 2000+ design library, 15,000 metres of daily capacity, and a team
-              that still hand-mixes every base colour the way our grandfather did.
+              Today we run one of Jaipur's most trusted screen printing facilities: a 2000+ design
+              library, 15,000 metres of daily capacity, and a team that still hand-mixes every base
+              colour the way our grandfather did.
             </p>
             <p>
-              Boutiques, D2C brands, and wholesalers across India trust us because
-              we treat <em>every</em> hundred-metre order like a heritage commission.
+              Boutiques, D2C brands, and wholesalers across India trust us because we treat{" "}
+              <em>every</em> hundred-metre order like a heritage commission.
             </p>
           </div>
         </motion.div>

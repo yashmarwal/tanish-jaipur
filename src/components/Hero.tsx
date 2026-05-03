@@ -3,7 +3,6 @@ import { Link } from "@tanstack/react-router";
 const WORD_DELAYS = ["0ms", "120ms", "260ms", "400ms"];
 
 export default function Hero() {
-
   return (
     <section className="relative min-h-[92vh] overflow-hidden pt-20 bg-background">
       {/* Rajasthani fabric background — subtle, behind everything */}
@@ -26,19 +25,33 @@ export default function Hero() {
 
           <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl text-primary leading-[0.95] text-balance">
             <span className="reveal-line">
-              <span className="reveal-word" style={{ animationDelay: WORD_DELAYS[0] }}>Where</span>{" "}
-              <span className="reveal-word text-accent italic" style={{ animationDelay: WORD_DELAYS[1] }}>Fabric</span>
+              <span className="reveal-word" style={{ animationDelay: WORD_DELAYS[0] }}>
+                Where
+              </span>{" "}
+              <span
+                className="reveal-word text-accent italic"
+                style={{ animationDelay: WORD_DELAYS[1] }}
+              >
+                Fabric
+              </span>
             </span>
             <br />
             <span className="reveal-line">
-              <span className="reveal-word" style={{ animationDelay: WORD_DELAYS[2] }}>Meets</span>{" "}
-              <span className="reveal-word italic shimmer-text" style={{ animationDelay: WORD_DELAYS[3] }}>Art</span>
+              <span className="reveal-word" style={{ animationDelay: WORD_DELAYS[2] }}>
+                Meets
+              </span>{" "}
+              <span
+                className="reveal-word italic shimmer-text"
+                style={{ animationDelay: WORD_DELAYS[3] }}
+              >
+                Art
+              </span>
             </span>
           </h1>
 
           <p className="mt-8 text-lg lg:text-xl text-foreground/75 max-w-xl fade-up">
-            Jaipur-based premium screen printing manufacturer. Hand-crafted designs,
-            delivered at scale to boutiques and brands worldwide.
+            Jaipur-based premium screen printing manufacturer. Hand-crafted designs, delivered at
+            scale to boutiques and brands worldwide.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4 fade-up">

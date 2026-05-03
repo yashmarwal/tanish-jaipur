@@ -3,7 +3,13 @@ import { waLink } from "@/lib/whatsapp";
 
 export default function BulkOrder() {
   const [form, setForm] = useState({
-    name: "", phone: "", company: "", design: "", quantity: "", color: "", notes: "",
+    name: "",
+    phone: "",
+    company: "",
+    design: "",
+    quantity: "",
+    color: "",
+    notes: "",
   });
 
   const submit = (e: React.FormEvent) => {
@@ -18,7 +24,8 @@ export default function BulkOrder() {
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">Bulk Manufacturing</p>
           <h2 className="font-display text-4xl lg:text-7xl text-primary leading-[0.95] text-balance">
-            Built for bulk.<br />
+            Built for bulk.
+            <br />
             <em className="text-accent">Crafted for growth.</em>
           </h2>
           <div className="mt-10 space-y-5">
@@ -28,7 +35,10 @@ export default function BulkOrder() {
               ["Capacity", "15,000 metres / day"],
               ["Designs", "2000+"],
             ].map(([k, v]) => (
-              <div key={k} className="flex items-baseline justify-between border-b border-border pb-3">
+              <div
+                key={k}
+                className="flex items-baseline justify-between border-b border-border pb-3"
+              >
                 <span className="text-sm uppercase tracking-wider text-foreground/60">{k}</span>
                 <span className="font-display text-2xl text-primary">{v}</span>
               </div>
@@ -36,7 +46,10 @@ export default function BulkOrder() {
           </div>
         </div>
 
-        <form onSubmit={submit} className="bg-card rounded-3xl p-8 lg:p-10 border border-border shadow-warm space-y-4">
+        <form
+          onSubmit={submit}
+          className="bg-card rounded-3xl p-8 lg:p-10 border border-border shadow-warm space-y-4"
+        >
           <h3 className="font-display text-2xl text-primary mb-2">Get a Bulk Quote</h3>
           {[
             { k: "name", p: "Your name", req: true },

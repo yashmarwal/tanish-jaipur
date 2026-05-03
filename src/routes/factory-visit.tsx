@@ -6,9 +6,16 @@ export const Route = createFileRoute("/factory-visit")({
   head: () => ({
     meta: [
       { title: "Factory Visit — See Our Sanganer Print Floor | Tanish Creation" },
-      { name: "description", content: "Book a free factory visit at our Jaipur screen printing facility. Walk the floor, meet our printers, choose your base fabric." },
+      {
+        name: "description",
+        content:
+          "Book a free factory visit at our Jaipur screen printing facility. Walk the floor, meet our printers, choose your base fabric.",
+      },
       { property: "og:title", content: "Visit Our Jaipur Print Factory" },
-      { property: "og:description", content: "Book a free visit to our Sanganer screen printing floor." },
+      {
+        property: "og:description",
+        content: "Book a free visit to our Sanganer screen printing floor.",
+      },
     ],
   }),
   component: VisitPage,
@@ -24,8 +31,8 @@ function VisitPage() {
             See your fabric, <em className="text-accent">before</em> it's yours.
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-md">
-            A factory visit is the fastest way to understand how Sanganer screen
-            printing actually works — and to see whether we're the right partner for you.
+            A factory visit is the fastest way to understand how Sanganer screen printing actually
+            works — and to see whether we're the right partner for you.
           </p>
           <ul className="mt-10 space-y-5">
             {[
