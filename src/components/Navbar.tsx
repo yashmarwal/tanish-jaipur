@@ -88,6 +88,17 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            <li className="pt-2 pb-1 border-t border-border mt-2">
+              <a
+                href={waLink("Hi Tanish Creation! I would like to ask for a sample fabric for a quality check.")}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2.5 rounded-full text-sm font-medium hover:bg-accent/90 transition-all w-full justify-center"
+              >
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                Ask for a sample fabric
+              </a>
+            </li>
           </ul>
         </div>
       )}
