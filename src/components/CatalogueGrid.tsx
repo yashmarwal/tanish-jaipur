@@ -114,7 +114,7 @@ export default function CatalogueGrid() {
                 </div>
               </dl>
               <a
-                href={designInquiry(selected.name)}
+                href={designInquiry(selected.name, selected.id)}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-8 inline-flex w-full justify-center items-center gap-2 bg-accent text-accent-foreground px-6 py-4 rounded-full font-medium hover:bg-accent/90 transition-all"
