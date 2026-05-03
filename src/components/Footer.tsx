@@ -71,7 +71,11 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2">
               <MapPin size={14} className="mt-1 shrink-0" />
-              <span>Ward no 36 saipura sanganer jaipur behind the homeopathic university</span>
+              <span>Ward No. 36, Saipura
+
+                Landmark: Behind Homeopathic University
+
+                City: Sanganer, Jaipur (Rajasthan)</span>
             </li>
             <li className="flex items-start gap-2">
               <Instagram size={14} className="mt-1" />
