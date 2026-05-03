@@ -15,7 +15,7 @@ const ITEMS = [
   {
     icon: Package,
     title: "Bulk Orders",
-    desc: "From 100 metres for a boutique drop to 15,000 metres a day for D2C scale. Same craft, every order.",
+    desc: "From 500 metres for a boutique drop to 15,000 metres a day for D2C scale. Same craft, every order.",
   },
   {
     icon: Layers,

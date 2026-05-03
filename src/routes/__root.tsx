@@ -13,7 +13,7 @@ const JSON_LD = {
   "@type": "LocalBusiness",
   name: "Tanish Creation",
   description:
-    "Premium screen printing fabric manufacturer based in Jaipur, India. 2000+ designs, bulk orders from 100 metres.",
+    "Premium screen printing fabric manufacturer based in Jaipur, India. 20000+ designs, bulk orders from 500 metres.",
   url: SITE_URL,
   telephone: "+91-83024-30391",
   email: "tanishcreation16@gmail.com",
@@ -58,7 +58,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Jaipur-based premium screen printing fabric manufacturer. 2000+ designs, bulk orders from 100 metres. 65+ years of heritage.",
+          "Jaipur-based premium screen printing fabric manufacturer. 20000+ designs, bulk orders from 500 metres. 65+ years of heritage.",
       },
       {
         name: "keywords",
@@ -69,7 +69,7 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Tanish Creation | Screen Printing Manufacturer Jaipur" },
       {
         property: "og:description",
-        content: "Premium screen printed fabrics from Jaipur. 2000+ designs, bulk from 100 metres.",
+        content: "Premium screen printed fabrics from Jaipur. 20000+ designs, bulk from 500 metres.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },

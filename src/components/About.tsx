@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const STATS = [
-  { value: "2000+", label: "Unique Designs" },
+  { value: "20000+", label: "Unique Designs" },
   { value: "1000+", label: "Happy Clients" },
   { value: "65+", label: "Years of Heritage" },
   { value: "15,000m", label: "Daily Capacity" },
@@ -27,7 +27,7 @@ export default function About() {
               household once carried a wooden block and a dye-stained dupatta hung from every roof.
             </p>
             <p>
-              Today we run one of Jaipur's most trusted screen printing facilities: a 2000+ design
+              Today we run one of Jaipur's most trusted screen printing facilities: a 20000+ design
               library, 15,000 metres of daily capacity, and a team that still hand-mixes every base
               colour the way our grandfather did.
             </p>

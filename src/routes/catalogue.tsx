@@ -8,7 +8,7 @@ export const Route = createFileRoute("/catalogue")({
       {
         name: "description",
         content:
-          "Browse our curated archive of screen printed fabric designs. Bulk orders from 100 metres. Custom designs available.",
+          "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres. Custom designs available.",
       },
       {
         property: "og:title",
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/catalogue")({
       {
         property: "og:description",
         content:
-          "Browse our curated archive of screen printed fabric designs. Bulk orders from 100 metres.",
+          "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres.",
       },
     ],
   }),

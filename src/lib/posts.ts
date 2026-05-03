@@ -74,12 +74,12 @@ export const POSTS: Post[] = [
     coverImage: "/blog_workshop_view_1777803506161.png",
     body: [
       "Most clients see the catalogue and the invoice. The middle — the actual manufacturing — is invisible. We think it shouldn't be. Here's exactly what happens between the moment you confirm an order and the moment your fabric ships.",
-      "Step one is design approval. You either pick a design from our 2000-strong archive or send us your own artwork. Our studio prepares a digital strike-off — a printed proof on your chosen base fabric — and ships it to you within 3-4 days. Nothing moves to bulk until you sign off.",
+      "Step one is design approval. You either pick a design from our 20000-strong archive or send us your own artwork. Our studio prepares a digital strike-off — a printed proof on your chosen base fabric — and ships it to you within 3-4 days. Nothing moves to bulk until you sign off.",
       "Step two is screen preparation. Each colour in your design gets its own screen: a fine polyester mesh stretched over an aluminium frame, hand-coated with a light-sensitive emulsion, exposed under your artwork on a UV table, and washed out so that pigment passes only through the design areas. A six-colour print needs six screens, and each screen takes about an hour to prepare.",
       "Step three is colour mixing. Our master colourist works against your reference — a fabric snip, a Pantone code, sometimes just a photo. Every formula is logged in a hand-written ledger so that repeat orders three months later use the exact same shade. Consistency across runs is one of our most-requested features.",
       "Step four is the print itself. Long printing tables — some up to 60 metres — are laid with the base fabric and lightly tacked down. Each screen is positioned by hand, pigment is poured at the top, and a squeegee pulls it across the screen in a single firm stroke. The screen lifts; the printer steps one repeat-length forward; the pull repeats. Six colours means six passes down the table.",
       "Step five is curing and quality. The printed fabric cures naturally in our drying yards (or, for some pigments, through a heated curing chamber) before going through a roll-by-roll quality inspection. Defects are flagged, the roll is reprinted if needed, and only then does it ship.",
-      "From design approval to dispatch, the typical timeline is 7–10 days for orders above 100 metres. Larger orders take longer only because the printing itself takes longer — every other step scales with our capacity.",
+      "From design approval to dispatch, the typical timeline is 7–10 days for orders above 500 metres. Larger orders take longer only because the printing itself takes longer — every other step scales with our capacity.",
     ],
   },
   {

@@ -72,8 +72,8 @@ export default function Hero() {
           <div className="mt-16 grid grid-cols-3 gap-6 max-w-xl fade-up">
             {[
               { n: "65+", l: "Years" },
-              { n: "2000+", l: "Designs" },
-              { n: "100m", l: "Min Order" },
+              { n: "20000+", l: "Designs" },
+              { n: "500m", l: "Min Order" },
             ].map((s) => (
               <div key={s.l}>
                 <p className="font-display text-3xl lg:text-4xl text-primary">{s.n}</p>

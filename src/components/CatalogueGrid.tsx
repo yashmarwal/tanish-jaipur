@@ -101,7 +101,7 @@ export default function CatalogueGrid() {
               <h3 className="font-display text-4xl text-primary mt-2">{selected.name}</h3>
               <p className="mt-4 text-foreground/70">
                 Screen print on premium base fabric. Custom colourways available. Lead
-                time 7–10 days for orders above 100 metres.
+                time 7–10 days for orders above 500 metres.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
                 <div>

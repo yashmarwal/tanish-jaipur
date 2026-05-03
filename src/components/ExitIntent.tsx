@@ -15,7 +15,19 @@ export default function ExitIntent() {
       }
     };
     document.addEventListener("mouseleave", onLeave);
-    return () => document.removeEventListener("mouseleave", onLeave);
+    
+    // Mobile fallback: trigger after 20 seconds
+    const timer = setTimeout(() => {
+      if (!sessionStorage.getItem("tc_exit")) {
+        setShow(true);
+        sessionStorage.setItem("tc_exit", "1");
+      }
+    }, 20000);
+
+    return () => {
+      document.removeEventListener("mouseleave", onLeave);
+      clearTimeout(timer);
+    };
   }, [dismissed]);
 
   if (!show) return null;

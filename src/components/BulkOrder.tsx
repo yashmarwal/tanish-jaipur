@@ -30,10 +30,10 @@ export default function BulkOrder() {
           </h2>
           <div className="mt-10 space-y-5">
             {[
-              ["Minimum order", "100 metres"],
+              ["Minimum order", "500 metres"],
               ["Lead time", "7–10 days"],
               ["Capacity", "15,000 metres / day"],
-              ["Designs", "2000+"],
+              ["Designs", "20000+"],
             ].map(([k, v]) => (
               <div
                 key={k}

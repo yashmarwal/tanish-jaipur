@@ -11,7 +11,7 @@ const NAMES = [
   "Champa Flow",
   "Mogra Spray",
   "Peony Glow",
-  "Tulip Whisper",
+  "Blue Elephant Print",
   "Jasmine Vine",
   "Monstera Drop",
   "Banyan Shade",
@@ -113,7 +113,7 @@ export function generateDesigns(total = 90): Design[] {
       name: NAMES[i % NAMES.length],
       imageUrl: url,
       imageUrlLarge: url,
-      minMetres: 100,
+      minMetres: 500,
     });
   }
   return designs;

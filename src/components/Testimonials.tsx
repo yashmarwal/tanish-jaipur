@@ -7,7 +7,7 @@ const REVIEWS = [
   {
     name: "Rohan Mehta",
     role: "Buyer, House of Khanak",
-    text: "We get 100m sample runs treated with the same care as 5000m bulk. That's rare in Jaipur.",
+    text: "We get 500m sample runs treated with the same care as 5000m bulk. That's rare in Jaipur.",
   },
   {
     name: "Priya Iyer",
