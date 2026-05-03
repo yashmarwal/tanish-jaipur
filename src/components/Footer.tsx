@@ -71,11 +71,11 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2">
               <MapPin size={14} className="mt-1 shrink-0" />
-              <span>Ward No. 36, Saipura
-
-                Landmark: Behind Homeopathic University
-
-                City: Sanganer, Jaipur (Rajasthan)</span>
+              <span className="whitespace-pre-line">
+                Address: Ward No. 36, Saipura{"\n"}
+                Landmark: Behind Homeopathic University{"\n"}
+                City: Sanganer, Jaipur (Rajasthan) pincode: 302029
+              </span>
             </li>
             <li className="flex items-start gap-2">
               <Instagram size={14} className="mt-1" />
