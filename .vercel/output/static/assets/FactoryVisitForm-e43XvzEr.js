@@ -1,4 +1,4 @@
-import{r as s,j as o,w as d}from"./index-CuWQe7BV.js";function u(){const[e,a]=s.useState({name:"",phone:"",company:"",date:"",visitors:"1",message:""}),n=r=>{r.preventDefault();const t=`🏭 FACTORY VISIT REQUEST
+import{r as s,j as o,w as d}from"./index-BrMIU5Rx.js";function u(){const[e,a]=s.useState({name:"",phone:"",company:"",date:"",visitors:"1",message:""}),n=r=>{r.preventDefault();const t=`🏭 FACTORY VISIT REQUEST
 
 Name: ${e.name}
 Phone: ${e.phone}

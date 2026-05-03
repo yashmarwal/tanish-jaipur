@@ -16,6 +16,12 @@ export default defineConfig({
     target: "vercel",
   },
   vite: {
-    plugins: [nitro()]
+    plugins: [nitro({
+      vercel: {
+        functions: {
+          runtime: "nodejs22.x"
+        }
+      }
+    })]
   }
 });

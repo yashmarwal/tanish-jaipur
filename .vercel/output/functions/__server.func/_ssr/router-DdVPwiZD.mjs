@@ -24,8 +24,8 @@ const GST = "08JVCPD4798C1ZD";
 function waLink(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
-function designInquiry(designName) {
-  return waLink(`Hi Tanish Creation! I'm interested in ordering ${designName} fabric.`);
+function designInquiry(designName, designId) {
+  return waLink(`Hi Tanish Creation! I'm interested in ordering ${designName} (${designId}) fabric.`);
 }
 const links = [
   { to: "/", label: "Home" },
@@ -329,7 +329,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ExitIntent, {})
   ] });
 }
-const $$splitComponentImporter$6 = () => import("./factory-visit-BQRS1YXv.mjs");
+const $$splitComponentImporter$6 = () => import("./factory-visit-CzXM13wC.mjs");
 const Route$6 = createFileRoute("/factory-visit")({
   head: () => ({
     meta: [{
@@ -347,7 +347,7 @@ const Route$6 = createFileRoute("/factory-visit")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-const $$splitComponentImporter$5 = () => import("./contact-DqXQtU3j.mjs");
+const $$splitComponentImporter$5 = () => import("./contact-BpN2W0Jd.mjs");
 const Route$5 = createFileRoute("/contact")({
   head: () => ({
     meta: [{
@@ -365,7 +365,7 @@ const Route$5 = createFileRoute("/contact")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./catalogue-J-yKSICD.mjs");
+const $$splitComponentImporter$4 = () => import("./catalogue-D8UDSPAj.mjs");
 const Route$4 = createFileRoute("/catalogue")({
   head: () => ({
     meta: [{
@@ -401,11 +401,11 @@ const Route$3 = createFileRoute("/about")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const $$splitComponentImporter$2 = () => import("./index-BakT0GHH.mjs");
+const $$splitComponentImporter$2 = () => import("./index-CvITJ7Xz.mjs");
 const Route$2 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./blog.index-M_hruo6p.mjs");
+const $$splitComponentImporter$1 = () => import("./blog.index-CPD3eZWx.mjs");
 const Route$1 = createFileRoute("/blog/")({
   head: () => ({
     meta: [{
@@ -548,7 +548,7 @@ const POSTS = [
   }
 ];
 const getPost = (slug) => POSTS.find((p) => p.slug === slug);
-const $$splitComponentImporter = () => import("./blog._slug-z6jAWZC1.mjs");
+const $$splitComponentImporter = () => import("./blog._slug-BEzz7C3g.mjs");
 const $$splitErrorComponentImporter = () => import("./blog._slug-N0l28j0C.mjs");
 const $$splitNotFoundComponentImporter = () => import("./blog._slug-Dx2OdYAY.mjs");
 const Route = createFileRoute("/blog/$slug")({

@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { g as generateDesigns } from "./catalogue-CColLUFO.mjs";
-import { w as waLink, d as designInquiry } from "./router-L25_gtVd.mjs";
+import { w as waLink, d as designInquiry } from "./router-DdVPwiZD.mjs";
 import { X } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -140,7 +140,7 @@ function CatalogueGrid() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "a",
                   {
-                    href: designInquiry(selected.name),
+                    href: designInquiry(selected.name, selected.id),
                     target: "_blank",
                     rel: "noreferrer",
                     className: "mt-8 inline-flex w-full justify-center items-center gap-2 bg-accent text-accent-foreground px-6 py-4 rounded-full font-medium hover:bg-accent/90 transition-all",

@@ -1,5 +1,5 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { P as PHONE_DISPLAY, E as EMAIL, I as INSTAGRAM, w as waLink } from "./router-L25_gtVd.mjs";
+import { P as PHONE_DISPLAY, E as EMAIL, I as INSTAGRAM, w as waLink } from "./router-DdVPwiZD.mjs";
 import { P as Phone, c as MessageCircle, a as Mail, I as Instagram, b as MapPin } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";

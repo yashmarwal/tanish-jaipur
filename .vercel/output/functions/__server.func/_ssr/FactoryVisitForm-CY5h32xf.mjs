@@ -1,5 +1,5 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { w as waLink } from "./router-L25_gtVd.mjs";
+import { w as waLink } from "./router-DdVPwiZD.mjs";
 function FactoryVisitForm() {
   const [form, setForm] = reactExports.useState({
     name: "",
