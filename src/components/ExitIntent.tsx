@@ -16,13 +16,13 @@ export default function ExitIntent() {
     };
     document.addEventListener("mouseleave", onLeave);
     
-    // Mobile fallback: trigger after 20 seconds
+    // Mobile fallback: trigger after 10 seconds
     const timer = setTimeout(() => {
       if (!sessionStorage.getItem("tc_exit")) {
         setShow(true);
         sessionStorage.setItem("tc_exit", "1");
       }
-    }, 20000);
+    }, 10000);
 
     return () => {
       document.removeEventListener("mouseleave", onLeave);
