@@ -4,10 +4,10 @@ import CatalogueGrid from "@/components/CatalogueGrid";
 export const Route = createFileRoute("/catalogue")({
   head: () => ({
     meta: [
-      { title: "Catalogue — 2000+ Screen Print Fabric Designs | Tanish Creation" },
-      { name: "description", content: "Browse 2000+ screen printed fabric designs across floral, paisley, jaal, botanical, animal and minimal categories. Bulk orders from 100 metres." },
-      { property: "og:title", content: "Catalogue — 2000+ Designs | Tanish Creation" },
-      { property: "og:description", content: "Browse our full design archive. Floral, paisley, jaal, and more." },
+      { title: "Catalogue — Screen Print Fabric Designs | Tanish Creation" },
+      { name: "description", content: "Browse our curated archive of screen printed fabric designs. Bulk orders from 100 metres. Custom designs available." },
+      { property: "og:title", content: "Catalogue — Screen Print Fabric Designs | Tanish Creation" },
+      { property: "og:description", content: "Browse our curated archive of screen printed fabric designs. Bulk orders from 100 metres." },
     ],
   }),
   component: CataloguePage,
@@ -16,15 +16,20 @@ export const Route = createFileRoute("/catalogue")({
 function CataloguePage() {
   return (
     <>
-      <section className="pt-32 lg:pt-40 pb-12 bg-gradient-cream">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="pt-32 lg:pt-40 pb-12 bg-gradient-cream relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.12] mix-blend-multiply"
+          style={{ backgroundImage: "url('/fabric-bg.jpeg')", backgroundSize: "360px", backgroundRepeat: "repeat" }}
+        />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">The Archive</p>
           <h1 className="font-display text-5xl lg:text-7xl text-primary leading-[0.95] text-balance">
-            2000+ designs. <em className="text-accent">One archive.</em>
+            Hand-printed designs. <em className="text-accent">Built for bulk.</em>
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-2xl">
-            Filter by category, click any design for details, and order on WhatsApp.
-            Custom designs available — every fifteenth tile is a fresh canvas.
+            Click any design for details and order on WhatsApp. Custom designs are
+            always welcome — every fifteenth tile is a fresh canvas waiting for you.
           </p>
         </div>
       </section>
