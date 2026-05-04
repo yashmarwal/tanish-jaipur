@@ -8,6 +8,9 @@ export function waLink(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-export function designInquiry(designName: string, designId: string) {
-  return waLink(`Hi Tanish Creation! I'm interested in ordering ${designName} (${designId}) fabric.`);
+export function designInquiry(designName: string, designId: string, imagePath: string) {
+  const absoluteImageUrl = `https://tanishcreation.lovable.app${imagePath}`;
+  return waLink(`Hi Tanish Creation! I'm interested in ordering ${designName} (${designId}) fabric.
+
+Reference: ${absoluteImageUrl}`);
 }
