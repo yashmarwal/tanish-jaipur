@@ -510,3 +510,4 @@ export const designs: Design[] = [
     "image": "/catalogue/70.jpg"
   }
 ];
+export function generateDesigns(count?: number) { return designs; }
