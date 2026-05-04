@@ -9,7 +9,7 @@ export function waLink(message: string) {
 }
 
 export function designInquiry(designName: string, designId: string, imagePath: string) {
-  const absoluteImageUrl = `https://tanishcreation.lovable.app${imagePath}`;
+  const absoluteImageUrl = `https://tanishcreation.com${imagePath}`;
   return waLink(`Hi Tanish Creation! I'm interested in ordering ${designName} (${designId}) fabric.
 
 Reference: ${absoluteImageUrl}`);
