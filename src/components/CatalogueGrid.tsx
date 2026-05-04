@@ -80,7 +80,7 @@ export default function CatalogueGrid() {
           >
             <div className="aspect-[4/3] relative bg-muted overflow-hidden">
               <img
-                src={selected.imageUrlLarge}
+                src={selected.imageUrl}
                 alt={`${selected.name} — screen printed fabric design`}
                 className="w-full h-full object-cover"
               />
