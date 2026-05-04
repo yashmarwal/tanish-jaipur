@@ -77,7 +77,7 @@ export default function Hero() {
               { n: "500m", l: "Min Order" },
             ].map((s) => (
               <div key={s.l}>
-                <p className="font-display text-3xl lg:text-4xl text-primary">
+                <p className="font-semibold tracking-tight text-3xl lg:text-4xl text-primary">
                   <AnimatedNumber value={s.n} />
                 </p>
                 <p className="text-xs uppercase tracking-[0.2em] text-foreground/60 mt-1">{s.l}</p>
