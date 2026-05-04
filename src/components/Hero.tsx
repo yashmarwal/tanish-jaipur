@@ -70,17 +70,17 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-6 max-w-xl fade-up">
+          <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-xl fade-up">
             {[
               { n: "65+", l: "Years" },
               { n: "20000+", l: "Designs" },
               { n: "500m", l: "Min Order" },
             ].map((s) => (
               <div key={s.l}>
-                <p className="font-semibold tracking-tight text-2xl lg:text-3xl text-primary whitespace-nowrap">
+                <p className="font-semibold tracking-tight text-2xl sm:text-3xl text-primary whitespace-nowrap">
                   <AnimatedNumber value={s.n} />
                 </p>
-                <p className="text-xs uppercase tracking-[0.2em] text-foreground/60 mt-1">{s.l}</p>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-foreground/60 mt-1">{s.l}</p>
               </div>
             ))}
           </div>

@@ -47,12 +47,12 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-card border border-border rounded-2xl p-6 lg:p-10 shadow-soft hover:shadow-warm transition-all group"
+              className="bg-card border border-border rounded-2xl p-4 sm:p-6 lg:p-10 shadow-soft hover:shadow-warm transition-all group"
             >
-              <div className="font-semibold text-3xl lg:text-4xl xl:text-5xl text-primary group-hover:text-accent transition-colors whitespace-nowrap">
+              <div className="font-semibold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-primary group-hover:text-accent transition-colors whitespace-nowrap">
                 <AnimatedNumber value={s.value} />
               </div>
-              <div className="mt-3 text-sm uppercase tracking-wider text-foreground/60">
+              <div className="mt-2 sm:mt-3 text-xs sm:text-sm uppercase tracking-wider text-foreground/60">
                 {s.label}
               </div>
             </motion.div>
