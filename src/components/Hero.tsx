@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Rajasthani fabric background — subtle, behind everything */}
       <div
         aria-hidden
-        className="absolute inset-0 z-0 opacity-[0.18] mix-blend-multiply"
+        className="absolute inset-0 z-0 opacity-[0.18] mix-blend-multiply animate-bg-pan"
         style={{
           backgroundImage: "url('/fabric-bg.jpeg')",
           backgroundSize: "420px",
