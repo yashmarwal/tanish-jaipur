@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AnimatedNumber from "./AnimatedNumber";
 
 const STATS = [
   { value: "20000+", label: "Unique Designs" },
@@ -49,7 +50,7 @@ export default function About() {
               className="bg-card border border-border rounded-2xl p-6 lg:p-10 shadow-soft hover:shadow-warm transition-all group"
             >
               <div className="font-display text-4xl lg:text-6xl text-primary group-hover:text-accent transition-colors">
-                {s.value}
+                <AnimatedNumber value={s.value} />
               </div>
               <div className="mt-3 text-sm uppercase tracking-wider text-foreground/60">
                 {s.label}
