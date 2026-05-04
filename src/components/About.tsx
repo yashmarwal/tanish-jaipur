@@ -49,7 +49,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="bg-card border border-border rounded-2xl p-6 lg:p-10 shadow-soft hover:shadow-warm transition-all group"
             >
-              <div className="font-semibold text-4xl lg:text-6xl text-primary group-hover:text-accent transition-colors">
+              <div className="font-semibold text-3xl lg:text-4xl xl:text-5xl text-primary group-hover:text-accent transition-colors whitespace-nowrap">
                 <AnimatedNumber value={s.value} />
               </div>
               <div className="mt-3 text-sm uppercase tracking-wider text-foreground/60">
