@@ -92,6 +92,21 @@ export default function Footer() {
           <p>Crafted in Jaipur • 65+ Years of Heritage</p>
         </div>
       </div>
+      <div className="border-t border-primary-foreground/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-3 text-center text-xs text-primary-foreground/50">
+          <p>
+            Developed by{" "}
+            <a
+              href="https://wa.me/918595475007?text=Hello%2C%20I%E2%80%99m%20interested%20in%20developing%20a%20website."
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-accent"
+            >
+              Yash Marwal
+            </a>
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }
