@@ -3,7 +3,6 @@ import appCss from "../styles.css?url";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Dock from "@/components/Dock";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SmoothScroll from "@/components/SmoothScroll";
 import ExitIntent from "@/components/ExitIntent";
 
@@ -122,7 +121,6 @@ function RootComponent() {
       </main>
       <Footer />
       <Dock />
-      <FloatingWhatsApp />
       <ExitIntent />
     </>
   );
