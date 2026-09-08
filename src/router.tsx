@@ -64,11 +64,13 @@ export const getRouter = () => {
     defaultViewTransition: {
       // Tag backward navigation (browser back button, or forward-ing into an
       // earlier history entry) so the CSS transition can play in reverse —
-      // see the `nav-back` view-transition type in styles.css.
+      // see the `nav-back` view-transition type in styles.css. Returning
+      // `false` here would skip the view transition entirely, so the
+      // forward/default case returns an empty (still truthy) array instead.
       types: ({ fromLocation, toLocation }) =>
         fromLocation && toLocation.state.__TSR_index < fromLocation.state.__TSR_index
           ? ["nav-back"]
-          : false,
+          : [],
     },
   });
 
