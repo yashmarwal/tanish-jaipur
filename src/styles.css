@@ -288,3 +288,78 @@
     background-size: 20px 20px;
   }
 }
+
+/*
+ * Page transitions, built on the native View Transitions API
+ * (see router.tsx: defaultViewTransition). Themed around the site's
+ * own craft — screen printing — rather than a generic fade/slide.
+ * Browsers without support (or reduced-motion users) simply get an
+ * instant page swap, no JS fallback needed.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Desktop — "Squeegee Wipe": the new page is dragged into view like ink
+   pulled across a screen, its leading edge glowing like wet ink. */
+@media (min-width: 1024px) {
+  ::view-transition-new(root) {
+    animation: squeegee-wipe 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    filter: drop-shadow(10px 0 18px oklch(0.625 0.13 55 / 0.5));
+  }
+}
+
+@keyframes squeegee-wipe {
+  from {
+    clip-path: polygon(-30% 0%, -10% 0%, -25% 100%, -30% 100%);
+  }
+  to {
+    clip-path: polygon(-30% 0%, 115% 0%, 100% 100%, -30% 100%);
+  }
+}
+
+/* Mobile — "Fabric Unroll": the old page rolls back and dims while the
+   new one rises into place like fresh cloth pulled off the bolt. */
+@media (max-width: 1023.98px) {
+  ::view-transition-old(root) {
+    animation: fabric-roll-back 520ms cubic-bezier(0.5, 0, 0.75, 0.35) both;
+  }
+  ::view-transition-new(root) {
+    animation: fabric-rise-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    filter: drop-shadow(0 -10px 14px oklch(0.275 0.038 50 / 0.4));
+  }
+}
+
+@keyframes fabric-roll-back {
+  to {
+    transform: translateY(-14%) scaleY(1.05);
+    filter: brightness(0.82);
+  }
+}
+
+@keyframes fabric-rise-in {
+  from {
+    transform: translateY(100%) scaleY(0.95);
+  }
+  60% {
+    transform: translateY(-2%) scaleY(1.01);
+  }
+  to {
+    transform: translateY(0%) scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
