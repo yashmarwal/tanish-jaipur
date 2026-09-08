@@ -326,6 +326,23 @@
   }
 }
 
+/* Desktop, navigating back: the wipe reverses direction (right to left). */
+@media (min-width: 1024px) {
+  :root:active-view-transition-type(nav-back)::view-transition-new(root) {
+    animation-name: squeegee-wipe-back;
+    filter: drop-shadow(-10px 0 18px oklch(0.625 0.13 55 / 0.5));
+  }
+}
+
+@keyframes squeegee-wipe-back {
+  from {
+    clip-path: polygon(130% 0%, 110% 0%, 125% 100%, 130% 100%);
+  }
+  to {
+    clip-path: polygon(130% 0%, -15% 0%, 0% 100%, 130% 100%);
+  }
+}
+
 /* Mobile — "Fabric Unroll": the old page rolls back and dims while the
    new one rises into place like fresh cloth pulled off the bolt. */
 @media (max-width: 1023.98px) {
@@ -351,6 +368,37 @@
   }
   60% {
     transform: translateY(-2%) scaleY(1.01);
+  }
+  to {
+    transform: translateY(0%) scaleY(1);
+  }
+}
+
+/* Mobile, navigating back: mirrored vertically — the old page rolls
+   forward and down, the previous page drops back in from above. */
+@media (max-width: 1023.98px) {
+  :root:active-view-transition-type(nav-back)::view-transition-old(root) {
+    animation-name: fabric-roll-forward;
+  }
+  :root:active-view-transition-type(nav-back)::view-transition-new(root) {
+    animation-name: fabric-drop-in;
+    filter: drop-shadow(0 10px 14px oklch(0.275 0.038 50 / 0.4));
+  }
+}
+
+@keyframes fabric-roll-forward {
+  to {
+    transform: translateY(14%) scaleY(1.05);
+    filter: brightness(0.82);
+  }
+}
+
+@keyframes fabric-drop-in {
+  from {
+    transform: translateY(-100%) scaleY(0.95);
+  }
+  40% {
+    transform: translateY(2%) scaleY(1.01);
   }
   to {
     transform: translateY(0%) scaleY(1);

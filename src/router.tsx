@@ -61,7 +61,15 @@ export const getRouter = () => {
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
-    defaultViewTransition: true,
+    defaultViewTransition: {
+      // Tag backward navigation (browser back button, or forward-ing into an
+      // earlier history entry) so the CSS transition can play in reverse —
+      // see the `nav-back` view-transition type in styles.css.
+      types: ({ fromLocation, toLocation }) =>
+        fromLocation && toLocation.state.__TSR_index < fromLocation.state.__TSR_index
+          ? ["nav-back"]
+          : false,
+    },
   });
 
   return router;
