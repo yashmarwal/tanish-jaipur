@@ -1,10 +1,14 @@
 import type { SVGProps } from "react";
 
-/** WhatsApp glyph (brand mark). */
-export default function WhatsApp({ className, ...props }: SVGProps<SVGSVGElement>) {
+type Props = Omit<SVGProps<SVGSVGElement>, "size"> & { size?: number | string };
+
+/** WhatsApp glyph (brand mark). Drop-in alongside lucide icons — accepts `size`. */
+export default function WhatsApp({ size = 24, className, ...props }: Props) {
   return (
     <svg
       viewBox="0 0 448 512"
+      width={size}
+      height={size}
       role="img"
       aria-hidden="true"
       fill="currentColor"

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { waLink } from "@/lib/whatsapp";
+import WhatsApp from "./icons/WhatsApp";
 
 export default function BulkOrder() {
   const [form, setForm] = useState({
@@ -94,9 +95,9 @@ export default function BulkOrder() {
           />
           <button
             type="submit"
-            className="w-full bg-accent text-accent-foreground py-4 rounded-full font-medium hover:bg-accent/90 transition-all hover:scale-[1.01]"
+            className="w-full bg-accent text-accent-foreground py-4 rounded-full font-medium hover:bg-accent/90 transition-all hover:scale-[1.01] inline-flex items-center justify-center gap-2"
           >
-            Get Quote on WhatsApp →
+            <WhatsApp className="h-4 w-4" /> Get Quote on WhatsApp
           </button>
         </form>
       </div>

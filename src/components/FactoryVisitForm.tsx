@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { waLink } from "@/lib/whatsapp";
+import WhatsApp from "./icons/WhatsApp";
 
 export default function FactoryVisitForm() {
   const [form, setForm] = useState({
@@ -77,9 +78,9 @@ export default function FactoryVisitForm() {
       />
       <button
         type="submit"
-        className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium hover:bg-primary/90 transition-all"
+        className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium hover:bg-primary/90 transition-all inline-flex items-center justify-center gap-2"
       >
-        Confirm via WhatsApp →
+        <WhatsApp className="h-4 w-4" /> Confirm via WhatsApp
       </button>
     </form>
   );

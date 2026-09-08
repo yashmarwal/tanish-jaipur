@@ -51,9 +51,9 @@ export function IntroProvider({ children }: { children: ReactNode }) {
               <motion.img
                 src="/favicon.jpg"
                 alt="Tanish Creation"
-                width={96}
-                height={96}
-                className="h-24 w-24 mix-blend-multiply"
+                width={88}
+                height={88}
+                className="h-22 w-22 rounded-2xl border border-border shadow-soft"
                 initial={{ opacity: 0, y: 14, scale: 0.92 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.7, ease: EASE_REVEAL, delay: 0.1 }}

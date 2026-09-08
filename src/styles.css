@@ -379,6 +379,12 @@ html.intro-done .intro-overlay {
   display: none !important;
 }
 
+/* Hide the mobile quick-actions dock while the full-screen menu is open. */
+html.menu-open .sticky-dock {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -31,8 +31,10 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.documentElement.classList.toggle("menu-open", open);
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.classList.remove("menu-open");
     };
   }, [open]);
 
@@ -101,7 +103,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-x-0 top-16 bottom-0 z-[45] flex flex-col overflow-y-auto bg-background px-6 pb-10 pt-4 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-45 flex flex-col overflow-y-auto bg-background px-6 pb-10 pt-4 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
