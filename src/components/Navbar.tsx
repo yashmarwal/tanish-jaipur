@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { waLink } from "@/lib/whatsapp";
+import WhatsApp from "./icons/WhatsApp";
 
 const links = [
   { to: "/", label: "Home" },
@@ -10,6 +11,9 @@ const links = [
   { to: "/factory-visit", label: "Factory Visit" },
   { to: "/contact", label: "Contact" },
 ] as const;
+
+const SAMPLE_MSG =
+  "Hi Tanish Creation! I would like to ask for a sample fabric for a quality check.";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -54,14 +58,15 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href={waLink("Hi Tanish Creation! I would like to ask for a sample fabric for a quality check.")}
+            href={waLink(SAMPLE_MSG)}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium hover:bg-accent/90 shadow-soft transition-all hover:scale-105"
+            aria-label="Ask for a sample fabric on WhatsApp"
+            className="inline-flex items-center gap-2 bg-[#25D366] text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium hover:scale-105 shadow-soft transition-transform"
           >
-            <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="hidden lg:inline">Ask for a sample fabric for quality check</span>
-            <span className="lg:hidden">Ask for sample</span>
+            <WhatsApp className="h-4 w-4 shrink-0" />
+            <span className="hidden lg:inline">Ask for a sample fabric</span>
+            <span className="lg:hidden">Sample</span>
           </a>
         </div>
       </nav>

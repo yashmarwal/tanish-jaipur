@@ -1,26 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import CatalogueGrid from "@/components/CatalogueGrid";
 
 export const Route = createFileRoute("/catalogue")({
-  head: () => ({
-    meta: [
-      { title: "Catalogue — Screen Print Fabric Designs | Tanish Creation" },
-      {
-        name: "description",
-        content:
-          "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres. Custom designs available.",
-      },
-      {
-        property: "og:title",
-        content: "Catalogue — Screen Print Fabric Designs | Tanish Creation",
-      },
-      {
-        property: "og:description",
-        content:
-          "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres.",
-      },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Catalogue — Screen Print Fabric Designs | Tanish Creation",
+      description:
+        "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres. Custom designs available.",
+      path: "/catalogue",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Catalogue", path: "/catalogue" },
+      ]),
+    }),
   component: CataloguePage,
 });
 
@@ -39,7 +32,7 @@ function CataloguePage() {
         />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">The Archive</p>
-          <h1 className="font-display text-5xl lg:text-7xl text-primary leading-[0.95] text-balance">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl text-primary leading-[1] sm:leading-[0.95] text-balance">
             Screen-printed designs. <em className="text-accent">Built for bulk.</em>
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-2xl">

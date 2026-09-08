@@ -1,27 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EMAIL, INSTAGRAM, PHONE_DISPLAY, waLink } from "@/lib/whatsapp";
-import { Phone, Mail, MapPin, Instagram, MessageCircle } from "lucide-react";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
+import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import WhatsApp from "@/components/icons/WhatsApp";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact Tanish Creation — Jaipur Screen Printing Manufacturer" },
-      {
-        name: "description",
-        content:
-          "Reach our Jaipur team for bulk fabric printing, custom designs, or a factory visit. Call, email, or WhatsApp us.",
-      },
-      { property: "og:title", content: "Contact Tanish Creation" },
-      { property: "og:description", content: "Reach our Jaipur team for bulk fabric printing." },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Contact Tanish Creation — Jaipur Screen Printing Manufacturer",
+      description:
+        "Reach our Jaipur team for bulk fabric printing, custom designs, or a factory visit. Call, email, or WhatsApp us.",
+      path: "/contact",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Contact", path: "/contact" },
+      ]),
+    }),
   component: Contact,
 });
 
 function Contact() {
   const items = [
     { I: Phone, k: "Call", v: PHONE_DISPLAY, href: `tel:+918302430391` },
-    { I: MessageCircle, k: "WhatsApp", v: PHONE_DISPLAY, href: waLink("Hi Tanish Creation!") },
+    { I: WhatsApp, k: "WhatsApp", v: PHONE_DISPLAY, href: waLink("Hi Tanish Creation!") },
     { I: Mail, k: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
     { I: Instagram, k: "Instagram", v: "@tanishcreation.co", href: INSTAGRAM },
     { I: MapPin, k: "Location", v: "Ward no 36 saipura sanganer jaipur behind the homeopathic university" },
@@ -30,7 +31,7 @@ function Contact() {
     <section className="pt-32 lg:pt-44 pb-24 bg-gradient-cream">
       <div className="max-w-5xl mx-auto px-6 lg:px-10 text-center">
         <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">Contact</p>
-        <h1 className="font-display text-5xl lg:text-7xl text-primary leading-[0.95] text-balance">
+        <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl text-primary leading-[1] sm:leading-[0.95] text-balance">
           Let's print something <em className="text-accent">beautiful</em>.
         </h1>
         <p className="mt-6 text-lg text-foreground/70 max-w-xl mx-auto">

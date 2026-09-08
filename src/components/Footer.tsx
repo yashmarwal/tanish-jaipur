@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { EMAIL, GST, INSTAGRAM, PHONE_DISPLAY, waLink } from "@/lib/whatsapp";
+import { EMAIL, GST, INSTAGRAM, PHONE_DISPLAY, WHATSAPP_NUMBER, waLink } from "@/lib/whatsapp";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
+import WhatsApp from "./icons/WhatsApp";
 
 export default function Footer() {
   return (
@@ -58,9 +59,16 @@ export default function Footer() {
           <h4 className="font-display text-lg mb-4 text-accent">Reach Us</h4>
           <ul className="space-y-3 text-sm text-primary-foreground/80">
             <li className="flex items-start gap-2">
-              <Phone size={14} className="mt-1" />
-              <a href={waLink("Hello!")} className="hover:text-accent">
-                {PHONE_DISPLAY}
+              <a href={`tel:+91${WHATSAPP_NUMBER.slice(2)}`} className="mt-1 hover:text-accent" aria-label="Call">
+                <Phone size={14} />
+              </a>
+              <a
+                href={waLink("Hi Tanish Creation!")}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-accent"
+              >
+                <WhatsApp className="h-3.5 w-3.5" /> {PHONE_DISPLAY}
               </a>
             </li>
             <li className="flex items-start gap-2">

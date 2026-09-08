@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { generateDesigns } from "@/lib/catalogue";
 import { useMemo } from "react";
+import { Magnetic } from "./motion";
 
 export default function CataloguePreview() {
   const previews = useMemo(() => generateDesigns(90).slice(0, 8), []);
@@ -16,12 +17,14 @@ export default function CataloguePreview() {
               A glimpse of <em className="text-accent">our archive.</em>
             </h2>
           </div>
-          <Link
-            to="/catalogue"
-            className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-4 rounded-full text-sm font-medium hover:bg-primary/90 shadow-warm transition-all hover:scale-105"
-          >
-            Open Full Catalogue <ArrowRight size={16} />
-          </Link>
+          <Magnetic>
+            <Link
+              to="/catalogue"
+              className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-4 rounded-full text-sm font-medium hover:bg-primary/90 shadow-warm transition-colors"
+            >
+              Open Full Catalogue <ArrowRight size={16} />
+            </Link>
+          </Magnetic>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
