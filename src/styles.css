@@ -106,6 +106,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   h1,
   h2,
@@ -114,6 +115,7 @@
   h5 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
+    overflow-wrap: break-word;
   }
 }
 
@@ -371,6 +373,10 @@ html.intro-playing {
 html.intro-playing .fade-up,
 html.intro-playing .reveal-word {
   animation-play-state: paused !important;
+}
+/* Failsafe: if the app never hydrates, the inline head script still lifts this. */
+html.intro-done .intro-overlay {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

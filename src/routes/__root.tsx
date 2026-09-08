@@ -90,11 +90,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
-        {/* Lock scroll for the intro overlay before first paint; the Preloader clears it. */}
+        {/* Lock scroll for the intro overlay before first paint; the Preloader clears it.
+            The setTimeout is a failsafe: if the app bundle never hydrates, the lock
+            still releases and the overlay is hidden so the page stays usable. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-playing')}catch(e){}",
+              "try{var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-playing');setTimeout(function(){d.classList.remove('intro-playing');d.classList.add('intro-done')},4000)}}catch(e){}",
           }}
         />
         <noscript>

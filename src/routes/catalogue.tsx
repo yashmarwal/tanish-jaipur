@@ -32,7 +32,7 @@ function CataloguePage() {
         />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">The Archive</p>
-          <h1 className="font-display text-5xl lg:text-7xl text-primary leading-[0.95] text-balance">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl text-primary leading-[1] sm:leading-[0.95] text-balance">
             Screen-printed designs. <em className="text-accent">Built for bulk.</em>
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-2xl">
