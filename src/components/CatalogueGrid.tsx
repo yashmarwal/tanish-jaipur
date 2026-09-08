@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { generateDesigns, Design } from "@/lib/catalogue";
 import { designInquiry, waLink } from "@/lib/whatsapp";
 import { X } from "lucide-react";
+import WhatsApp from "./icons/WhatsApp";
 
 export default function CatalogueGrid() {
   const designs = useMemo(() => generateDesigns(90), []);
@@ -22,9 +23,9 @@ export default function CatalogueGrid() {
             href={waLink("Hi Tanish Creation! I'd like to discuss a custom design.")}
             target="_blank"
             rel="noreferrer"
-            className="text-sm bg-accent text-accent-foreground px-5 py-2.5 rounded-full hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 text-sm bg-accent text-accent-foreground px-5 py-2.5 rounded-full hover:scale-105 transition-transform"
           >
-            + Custom Design
+            <WhatsApp className="h-4 w-4" /> Custom Design
           </a>
         </div>
 
@@ -59,8 +60,8 @@ export default function CatalogueGrid() {
                   className="bg-gradient-warm text-accent-foreground rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform"
                 >
                   <p className="font-display text-2xl leading-tight">Custom Design Available</p>
-                  <span className="text-sm mt-4 underline underline-offset-4">
-                    Start on WhatsApp →
+                  <span className="text-sm mt-4 inline-flex items-center gap-2">
+                    <WhatsApp className="h-4 w-4" /> Start on WhatsApp
                   </span>
                 </a>
               )}
@@ -115,7 +116,7 @@ export default function CatalogueGrid() {
                 rel="noreferrer"
                 className="mt-8 inline-flex w-full justify-center items-center gap-2 bg-accent text-accent-foreground px-6 py-4 rounded-full font-medium hover:bg-accent/90 transition-all"
               >
-                Inquire on WhatsApp →
+                <WhatsApp className="h-4 w-4" /> Inquire on WhatsApp
               </a>
             </div>
           </div>

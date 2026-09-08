@@ -1,23 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import FactoryVisitForm from "@/components/FactoryVisitForm";
 import { MapPin, Clock, Users } from "lucide-react";
 
 export const Route = createFileRoute("/factory-visit")({
-  head: () => ({
-    meta: [
-      { title: "Factory Visit — See Our Sanganer Print Floor | Tanish Creation" },
-      {
-        name: "description",
-        content:
-          "Book a free factory visit at our Jaipur screen printing facility. Walk the floor, meet our printers, choose your base fabric.",
-      },
-      { property: "og:title", content: "Visit Our Jaipur Print Factory" },
-      {
-        property: "og:description",
-        content: "Book a free visit to our Sanganer screen printing floor.",
-      },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Factory Visit — See Our Sanganer Print Floor | Tanish Creation",
+      description:
+        "Book a free factory visit at our Jaipur screen printing facility. Walk the floor, meet our printers, choose your base fabric.",
+      path: "/factory-visit",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Factory Visit", path: "/factory-visit" },
+      ]),
+    }),
   component: VisitPage,
 });
 
@@ -27,7 +24,7 @@ function VisitPage() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">Factory Visit</p>
-          <h1 className="font-display text-5xl lg:text-7xl text-primary leading-[0.95] text-balance">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl text-primary leading-[1] sm:leading-[0.95] text-balance">
             See your fabric, <em className="text-accent">before</em> it's yours.
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-md">

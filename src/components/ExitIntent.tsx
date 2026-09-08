@@ -33,7 +33,7 @@ export default function ExitIntent() {
   if (!show) return null;
   return (
     <div className="fixed inset-0 z-[60] bg-primary/70 backdrop-blur-sm flex items-center justify-center p-4 fade-up">
-      <div className="bg-card rounded-3xl max-w-md w-full p-8 lg:p-10 shadow-warm relative">
+      <div className="bg-card rounded-3xl max-w-md w-full p-6 sm:p-8 lg:p-10 shadow-warm relative">
         <button
           onClick={() => {
             setShow(false);
@@ -45,7 +45,7 @@ export default function ExitIntent() {
           <X size={18} />
         </button>
         <p className="text-xs uppercase tracking-[0.3em] text-accent">Wait — visit us first</p>
-        <h3 className="font-display text-3xl text-primary mt-3 leading-tight">
+        <h3 className="font-display text-2xl sm:text-3xl text-primary mt-3 leading-tight pr-6">
           See your fabric being printed in person.
         </h3>
         <p className="mt-4 text-foreground/70 text-sm">
