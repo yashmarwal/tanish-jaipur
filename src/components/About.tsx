@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import AnimatedNumber from "./AnimatedNumber";
+import { CountUp } from "./motion";
 
 const STATS = [
-  { value: "20000+", label: "Unique Designs" },
-  { value: "1000+", label: "Happy Clients" },
-  { value: "65+", label: "Years of Heritage" },
-  { value: "15,000m", label: "Daily Capacity" },
+  { to: 20000, suffix: "+", separator: true, label: "Unique Designs" },
+  { to: 1000, suffix: "+", separator: true, label: "Happy Clients" },
+  { to: 65, suffix: "+", separator: false, label: "Years of Heritage" },
+  { to: 15000, suffix: "m", separator: true, label: "Daily Capacity" },
 ];
 
 export default function About() {
@@ -50,7 +50,7 @@ export default function About() {
               className="bg-card border border-border rounded-2xl p-4 sm:p-6 lg:p-10 shadow-soft hover:shadow-warm transition-all group"
             >
               <div className="font-semibold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-primary group-hover:text-accent transition-colors whitespace-nowrap">
-                <AnimatedNumber value={s.value} />
+                <CountUp to={s.to} suffix={s.suffix} separator={s.separator} />
               </div>
               <div className="mt-2 sm:mt-3 text-xs sm:text-sm uppercase tracking-wider text-foreground/60">
                 {s.label}

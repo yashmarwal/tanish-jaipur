@@ -5,27 +5,12 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SmoothScroll from "@/components/SmoothScroll";
 import ExitIntent from "@/components/ExitIntent";
+import StickyCta from "@/components/StickyCta";
+import { IntroProvider } from "@/components/Preloader";
+import { SITE, organizationSchema } from "@/lib/seo";
 
-const SITE_URL = "https://tanishcreation.com";
-
-const JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Tanish Creation",
-  description:
-    "Premium screen printing fabric manufacturer based in Jaipur, India. 20000+ designs, bulk orders from 500 metres.",
-  url: SITE_URL,
-  telephone: "+91-83024-30391",
-  email: "tanishcreation16@gmail.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Jaipur",
-    addressRegion: "Rajasthan",
-    addressCountry: "IN",
-  },
-  sameAs: ["https://www.instagram.com/tanishcreation.co"],
-  foundingDate: "1959",
-};
+const SITE_URL = SITE.url;
+const JSON_LD = organizationSchema;
 
 function NotFoundComponent() {
   return (
@@ -73,7 +58,10 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
+      { property: "og:site_name", content: "Tanish Creation" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
       { rel: "icon", type: "image/jpeg", href: "/favicon.jpg" },
@@ -102,6 +90,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Lock scroll for the intro overlay before first paint; the Preloader clears it. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-playing')}catch(e){}",
+          }}
+        />
+        <noscript>
+          <style>{".intro-overlay{display:none!important}html.intro-playing{overflow:auto!important}"}</style>
+        </noscript>
       </head>
       <body>
         {children}
@@ -113,7 +111,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <>
+    <IntroProvider>
       <SmoothScroll />
       <Navbar />
       <main>
@@ -121,7 +119,8 @@ function RootComponent() {
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <StickyCta />
       <ExitIntent />
-    </>
+    </IntroProvider>
   );
 }

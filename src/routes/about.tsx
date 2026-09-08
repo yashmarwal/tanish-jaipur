@@ -1,24 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import About from "@/components/About";
 import Craft from "@/components/Craft";
 import Process from "@/components/Process";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Tanish Creation — 65 Years of Jaipur Screen Printing" },
-      {
-        name: "description",
-        content:
-          "Three generations of Sanganer screen printing heritage. Meet the team, the craft, and the values behind Tanish Creation.",
-      },
-      { property: "og:title", content: "About Tanish Creation" },
-      {
-        property: "og:description",
-        content: "Three generations of Sanganer screen printing heritage in Jaipur.",
-      },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "About Tanish Creation — 65 Years of Jaipur Screen Printing",
+      description:
+        "Three generations of Sanganer screen printing heritage. Meet the team, the craft, and the values behind Tanish Creation.",
+      path: "/about",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "About", path: "/about" },
+      ]),
+    }),
   component: AboutPage,
 });
 

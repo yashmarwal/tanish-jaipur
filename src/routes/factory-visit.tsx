@@ -1,23 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import FactoryVisitForm from "@/components/FactoryVisitForm";
 import { MapPin, Clock, Users } from "lucide-react";
 
 export const Route = createFileRoute("/factory-visit")({
-  head: () => ({
-    meta: [
-      { title: "Factory Visit — See Our Sanganer Print Floor | Tanish Creation" },
-      {
-        name: "description",
-        content:
-          "Book a free factory visit at our Jaipur screen printing facility. Walk the floor, meet our printers, choose your base fabric.",
-      },
-      { property: "og:title", content: "Visit Our Jaipur Print Factory" },
-      {
-        property: "og:description",
-        content: "Book a free visit to our Sanganer screen printing floor.",
-      },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Factory Visit — See Our Sanganer Print Floor | Tanish Creation",
+      description:
+        "Book a free factory visit at our Jaipur screen printing facility. Walk the floor, meet our printers, choose your base fabric.",
+      path: "/factory-visit",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Factory Visit", path: "/factory-visit" },
+      ]),
+    }),
   component: VisitPage,
 });
 

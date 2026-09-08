@@ -1,20 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EMAIL, INSTAGRAM, PHONE_DISPLAY, waLink } from "@/lib/whatsapp";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import { Phone, Mail, MapPin, Instagram, MessageCircle } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact Tanish Creation — Jaipur Screen Printing Manufacturer" },
-      {
-        name: "description",
-        content:
-          "Reach our Jaipur team for bulk fabric printing, custom designs, or a factory visit. Call, email, or WhatsApp us.",
-      },
-      { property: "og:title", content: "Contact Tanish Creation" },
-      { property: "og:description", content: "Reach our Jaipur team for bulk fabric printing." },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Contact Tanish Creation — Jaipur Screen Printing Manufacturer",
+      description:
+        "Reach our Jaipur team for bulk fabric printing, custom designs, or a factory visit. Call, email, or WhatsApp us.",
+      path: "/contact",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Contact", path: "/contact" },
+      ]),
+    }),
   component: Contact,
 });
 

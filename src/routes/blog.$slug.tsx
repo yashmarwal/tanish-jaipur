@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getPost, POSTS } from "@/lib/posts";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -12,16 +13,19 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!post) {
       return { meta: [{ title: "Article — Tanish Creation" }] };
     }
-    return {
-      meta: [
-        { title: `${post.title} — Tanish Creation Journal` },
-        { name: "description", content: post.excerpt },
-        { name: "keywords", content: post.keywords },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.excerpt },
-        { property: "og:type", content: "article" },
-      ],
-    };
+    return buildPageHead({
+      title: `${post.title} — Tanish Creation Journal`,
+      description: post.excerpt,
+      path: `/blog/${post.slug}`,
+      type: "article",
+      keywords: post.keywords,
+      image: post.coverImage,
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Journal", path: "/blog" },
+        { name: post.title, path: `/blog/${post.slug}` },
+      ]),
+    });
   },
   notFoundComponent: () => (
     <div className="min-h-screen flex items-center justify-center pt-20">

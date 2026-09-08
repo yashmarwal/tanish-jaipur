@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import AnimatedNumber from "./AnimatedNumber";
+import { CountUp, Magnetic } from "./motion";
 
 const WORD_DELAYS = ["0ms", "120ms", "260ms", "400ms"];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] overflow-hidden pt-20 bg-background">
+    <section className="grain relative min-h-[92vh] overflow-hidden pt-20 bg-background">
       {/* Rajasthani fabric background — subtle, behind everything */}
       <div
         aria-hidden
@@ -56,29 +56,33 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4 fade-up">
-            <Link
-              to="/catalogue"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-4 rounded-full text-sm font-medium hover:bg-primary/90 shadow-warm transition-all hover:scale-105"
-            >
-              View Catalogue →
-            </Link>
-            <Link
-              to="/factory-visit"
-              className="inline-flex items-center gap-2 border border-primary text-primary px-7 py-4 rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-all"
-            >
-              Visit Our Factory
-            </Link>
+            <Magnetic>
+              <Link
+                to="/catalogue"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-4 rounded-full text-sm font-medium hover:bg-primary/90 shadow-warm transition-colors"
+              >
+                View Catalogue →
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link
+                to="/factory-visit"
+                className="inline-flex items-center gap-2 border border-primary text-primary px-7 py-4 rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                Visit Our Factory
+              </Link>
+            </Magnetic>
           </div>
 
           <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-xl fade-up">
             {[
-              { n: "65+", l: "Years" },
-              { n: "20000+", l: "Designs" },
-              { n: "500m", l: "Min Order" },
+              { to: 65, suffix: "+", separator: false, l: "Years" },
+              { to: 20000, suffix: "+", separator: true, l: "Designs" },
+              { to: 500, suffix: "m", separator: false, l: "Min Order" },
             ].map((s) => (
               <div key={s.l}>
                 <p className="font-semibold tracking-tight text-2xl sm:text-3xl text-primary whitespace-nowrap">
-                  <AnimatedNumber value={s.n} />
+                  <CountUp to={s.to} suffix={s.suffix} separator={s.separator} />
                 </p>
                 <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-foreground/60 mt-1">{s.l}</p>
               </div>

@@ -1,26 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import CatalogueGrid from "@/components/CatalogueGrid";
 
 export const Route = createFileRoute("/catalogue")({
-  head: () => ({
-    meta: [
-      { title: "Catalogue — Screen Print Fabric Designs | Tanish Creation" },
-      {
-        name: "description",
-        content:
-          "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres. Custom designs available.",
-      },
-      {
-        property: "og:title",
-        content: "Catalogue — Screen Print Fabric Designs | Tanish Creation",
-      },
-      {
-        property: "og:description",
-        content:
-          "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres.",
-      },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Catalogue — Screen Print Fabric Designs | Tanish Creation",
+      description:
+        "Browse our curated archive of screen printed fabric designs. Bulk orders from 500 metres. Custom designs available.",
+      path: "/catalogue",
+      jsonLd: breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Catalogue", path: "/catalogue" },
+      ]),
+    }),
   component: CataloguePage,
 });
 
