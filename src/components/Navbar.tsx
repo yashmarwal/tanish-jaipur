@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { waLink } from "@/lib/whatsapp";
-import { Menu, X } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
@@ -14,7 +13,6 @@ const links = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -65,44 +63,8 @@ export default function Navbar() {
             <span className="hidden lg:inline">Ask for a sample fabric for quality check</span>
             <span className="lg:hidden">Ask for sample</span>
           </a>
-          <button
-            className="lg:hidden p-2 text-primary"
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
         </div>
       </nav>
-
-      {open && (
-        <div className="lg:hidden bg-background border-t border-border">
-          <ul className="flex flex-col px-6 py-4 gap-3">
-            {links.map((l) => (
-              <li key={l.to}>
-                <Link
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  className="block py-2 text-foreground hover:text-accent"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-            <li className="pt-2 pb-1 border-t border-border mt-2">
-              <a
-                href={waLink("Hi Tanish Creation! I would like to ask for a sample fabric for a quality check.")}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2.5 rounded-full text-sm font-medium hover:bg-accent/90 transition-all w-full justify-center"
-              >
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                Ask for a sample fabric
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
     </header>
   );
 }

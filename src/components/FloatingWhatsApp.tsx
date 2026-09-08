@@ -8,7 +8,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-warm transition-transform hover:scale-110"
+      className="fixed bottom-24 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-warm transition-transform hover:scale-110 lg:bottom-28"
     >
       <MessageCircle size={26} />
       <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-ping" />
