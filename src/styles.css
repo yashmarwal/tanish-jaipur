@@ -346,13 +346,14 @@
 }
 
 /* Mobile — "Swatch Book Flip": pages turn like flipping one card over
-   in a fabric sample book — a real 3D rotation hinged at the top edge,
-   not a slide. The old card tips away and back, the next one swings
-   in from behind it, both darkening as they go edge-on to sell depth. */
+   in a fabric sample book — a real 3D rotation hinged at the left
+   edge, like a notebook page, not a slide. The old card turns away
+   over the spine, the next one swings in from behind it, both
+   darkening as they go edge-on to sell depth. */
 @media (max-width: 1023.98px) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    transform-origin: top center;
+    transform-origin: left center;
     backface-visibility: hidden;
   }
   ::view-transition-old(root) {
@@ -365,11 +366,11 @@
 
 @keyframes swatch-flip-out {
   from {
-    transform: perspective(1400px) rotateX(0deg);
+    transform: perspective(1400px) rotateY(0deg);
     filter: brightness(1);
   }
   to {
-    transform: perspective(1400px) rotateX(-88deg);
+    transform: perspective(1400px) rotateY(-88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
@@ -377,20 +378,20 @@
 
 @keyframes swatch-flip-in {
   from {
-    transform: perspective(1400px) rotateX(88deg);
+    transform: perspective(1400px) rotateY(88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
   to {
-    transform: perspective(1400px) rotateX(0deg);
+    transform: perspective(1400px) rotateY(0deg);
     filter: brightness(1);
     opacity: 1;
   }
 }
 
-/* Mobile, navigating back: the flip reverses — the current card tips
-   forward and down instead of back, the previous one swings in from
-   below instead of above. */
+/* Mobile, navigating back: the flip reverses — the current card turns
+   the other way over the spine, the previous one swings in from
+   behind instead of ahead. */
 @media (max-width: 1023.98px) {
   :root:active-view-transition-type(nav-back)::view-transition-old(root) {
     animation-name: swatch-flip-out-back;
@@ -402,11 +403,11 @@
 
 @keyframes swatch-flip-out-back {
   from {
-    transform: perspective(1400px) rotateX(0deg);
+    transform: perspective(1400px) rotateY(0deg);
     filter: brightness(1);
   }
   to {
-    transform: perspective(1400px) rotateX(88deg);
+    transform: perspective(1400px) rotateY(88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
@@ -414,12 +415,12 @@
 
 @keyframes swatch-flip-in-back {
   from {
-    transform: perspective(1400px) rotateX(-88deg);
+    transform: perspective(1400px) rotateY(-88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
   to {
-    transform: perspective(1400px) rotateX(0deg);
+    transform: perspective(1400px) rotateY(0deg);
     filter: brightness(1);
     opacity: 1;
   }
