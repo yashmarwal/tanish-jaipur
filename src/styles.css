@@ -347,9 +347,10 @@
 
 /* Mobile — "Swatch Book Flip": pages turn like flipping one card over
    in a fabric sample book — a real 3D rotation hinged at the left
-   edge, like a notebook page, not a slide. The old card turns away
-   over the spine, the next one swings in from behind it, both
-   darkening as they go edge-on to sell depth. */
+   edge, like a notebook page, not a slide. Forward: only the current
+   card visibly moves, turning away over the spine (going to the left)
+   like a real page flip — the next card is simply revealed underneath
+   once it's mostly out of the way, it doesn't fly in from anywhere. */
 @media (max-width: 1023.98px) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
@@ -377,14 +378,11 @@
 }
 
 @keyframes swatch-flip-in {
-  from {
-    transform: perspective(1400px) rotateY(-88deg);
-    filter: brightness(0.5);
+  0%,
+  55% {
     opacity: 0;
   }
-  to {
-    transform: perspective(1400px) rotateY(0deg);
-    filter: brightness(1);
+  100% {
     opacity: 1;
   }
 }
