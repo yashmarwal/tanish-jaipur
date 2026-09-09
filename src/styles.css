@@ -370,7 +370,7 @@
     filter: brightness(1);
   }
   to {
-    transform: perspective(1400px) rotateY(-88deg);
+    transform: perspective(1400px) rotateY(88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
@@ -378,7 +378,7 @@
 
 @keyframes swatch-flip-in {
   from {
-    transform: perspective(1400px) rotateY(88deg);
+    transform: perspective(1400px) rotateY(-88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
@@ -407,7 +407,7 @@
     filter: brightness(1);
   }
   to {
-    transform: perspective(1400px) rotateY(88deg);
+    transform: perspective(1400px) rotateY(-88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
@@ -415,7 +415,7 @@
 
 @keyframes swatch-flip-in-back {
   from {
-    transform: perspective(1400px) rotateY(-88deg);
+    transform: perspective(1400px) rotateY(88deg);
     filter: brightness(0.5);
     opacity: 0;
   }
