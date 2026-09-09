@@ -2,10 +2,9 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import Dock from "@/components/Dock";
 import SmoothScroll from "@/components/SmoothScroll";
 import ExitIntent from "@/components/ExitIntent";
-import StickyCta from "@/components/StickyCta";
 import { IntroProvider } from "@/components/Preloader";
 import { SITE, organizationSchema } from "@/lib/seo";
 
@@ -120,8 +119,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
-      <FloatingWhatsApp />
-      <StickyCta />
+      <Dock />
       <ExitIntent />
     </IntroProvider>
   );

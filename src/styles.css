@@ -291,6 +291,139 @@
   }
 }
 
+/*
+ * Page transitions, built on the native View Transitions API
+ * (see router.tsx: defaultViewTransition). Themed around the site's
+ * own craft — screen printing — rather than a generic fade/slide.
+ * Browsers without support (or reduced-motion users) simply get an
+ * instant page swap, no JS fallback needed.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Desktop — "Squeegee Wipe": the new page is dragged into view like ink
+   pulled across a screen, its leading edge glowing like wet ink. */
+@media (min-width: 1024px) {
+  ::view-transition-new(root) {
+    animation: squeegee-wipe 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    filter: drop-shadow(10px 0 18px oklch(0.625 0.13 55 / 0.5));
+  }
+}
+
+@keyframes squeegee-wipe {
+  from {
+    clip-path: polygon(-30% 0%, -10% 0%, -25% 100%, -30% 100%);
+  }
+  to {
+    clip-path: polygon(-30% 0%, 115% 0%, 100% 100%, -30% 100%);
+  }
+}
+
+/* Desktop, navigating back: the wipe reverses direction (right to left). */
+@media (min-width: 1024px) {
+  :root:active-view-transition-type(nav-back)::view-transition-new(root) {
+    animation-name: squeegee-wipe-back;
+    filter: drop-shadow(-10px 0 18px oklch(0.625 0.13 55 / 0.5));
+  }
+}
+
+@keyframes squeegee-wipe-back {
+  from {
+    clip-path: polygon(130% 0%, 110% 0%, 125% 100%, 130% 100%);
+  }
+  to {
+    clip-path: polygon(130% 0%, -15% 0%, 0% 100%, 130% 100%);
+  }
+}
+
+/* Mobile — "Swatch Book Flip": pages turn like flipping one card over
+   in a fabric sample book — a real 3D rotation hinged at the left
+   edge, like a notebook page, not a slide. Forward: only the current
+   card visibly moves, turning away over the spine (going to the left)
+   like a real page flip — the next card is simply revealed underneath
+   once it's mostly out of the way, it doesn't fly in from anywhere. */
+@media (max-width: 1023.98px) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    transform-origin: left center;
+    backface-visibility: hidden;
+  }
+  ::view-transition-old(root) {
+    animation: swatch-flip-out 560ms cubic-bezier(0.5, 0, 0.75, 0.35) both;
+  }
+  ::view-transition-new(root) {
+    animation: swatch-flip-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes swatch-flip-out {
+  from {
+    transform: perspective(1400px) rotateY(0deg);
+    filter: brightness(1);
+  }
+  to {
+    transform: perspective(1400px) rotateY(88deg);
+    filter: brightness(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes swatch-flip-in {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Mobile, navigating back: the flip reverses — the current card turns
+   the other way over the spine, the previous one swings in from
+   behind instead of ahead. */
+@media (max-width: 1023.98px) {
+  :root:active-view-transition-type(nav-back)::view-transition-old(root) {
+    animation-name: swatch-flip-out-back;
+  }
+  :root:active-view-transition-type(nav-back)::view-transition-new(root) {
+    animation-name: swatch-flip-in-back;
+  }
+}
+
+@keyframes swatch-flip-out-back {
+  from {
+    transform: perspective(1400px) rotateY(0deg);
+    filter: brightness(1);
+  }
+  to {
+    transform: perspective(1400px) rotateY(-88deg);
+    filter: brightness(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes swatch-flip-in-back {
+  from {
+    transform: perspective(1400px) rotateY(88deg);
+    filter: brightness(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(1400px) rotateY(0deg);
+    filter: brightness(1);
+    opacity: 1;
+  }
+}
+
 /* ---------------------------------------------------------------------------
  * Shared polish primitives (integrated from the Mapps Creation motion system)
  * ------------------------------------------------------------------------- */
@@ -379,12 +512,6 @@ html.intro-done .intro-overlay {
   display: none !important;
 }
 
-/* Hide the mobile quick-actions dock while the full-screen menu is open. */
-html.menu-open .sticky-dock {
-  opacity: 0;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -395,5 +522,9 @@ html.menu-open .sticky-dock {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
