@@ -345,65 +345,83 @@
   }
 }
 
-/* Mobile — "Fabric Unroll": the old page rolls back and dims while the
-   new one rises into place like fresh cloth pulled off the bolt. */
+/* Mobile — "Swatch Book Flip": pages turn like flipping one card over
+   in a fabric sample book — a real 3D rotation hinged at the top edge,
+   not a slide. The old card tips away and back, the next one swings
+   in from behind it, both darkening as they go edge-on to sell depth. */
 @media (max-width: 1023.98px) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    transform-origin: top center;
+    backface-visibility: hidden;
+  }
   ::view-transition-old(root) {
-    animation: fabric-roll-back 520ms cubic-bezier(0.5, 0, 0.75, 0.35) both;
+    animation: swatch-flip-out 560ms cubic-bezier(0.5, 0, 0.75, 0.35) both;
   }
   ::view-transition-new(root) {
-    animation: fabric-rise-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    filter: drop-shadow(0 -10px 14px oklch(0.275 0.038 50 / 0.4));
+    animation: swatch-flip-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 
-@keyframes fabric-roll-back {
-  to {
-    transform: translateY(-14%) scaleY(1.05);
-    filter: brightness(0.82);
-  }
-}
-
-@keyframes fabric-rise-in {
+@keyframes swatch-flip-out {
   from {
-    transform: translateY(100%) scaleY(0.95);
-  }
-  60% {
-    transform: translateY(-2%) scaleY(1.01);
+    transform: perspective(1400px) rotateX(0deg);
+    filter: brightness(1);
   }
   to {
-    transform: translateY(0%) scaleY(1);
+    transform: perspective(1400px) rotateX(-88deg);
+    filter: brightness(0.5);
+    opacity: 0;
   }
 }
 
-/* Mobile, navigating back: mirrored vertically — the old page rolls
-   forward and down, the previous page drops back in from above. */
+@keyframes swatch-flip-in {
+  from {
+    transform: perspective(1400px) rotateX(88deg);
+    filter: brightness(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(1400px) rotateX(0deg);
+    filter: brightness(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile, navigating back: the flip reverses — the current card tips
+   forward and down instead of back, the previous one swings in from
+   below instead of above. */
 @media (max-width: 1023.98px) {
   :root:active-view-transition-type(nav-back)::view-transition-old(root) {
-    animation-name: fabric-roll-forward;
+    animation-name: swatch-flip-out-back;
   }
   :root:active-view-transition-type(nav-back)::view-transition-new(root) {
-    animation-name: fabric-drop-in;
-    filter: drop-shadow(0 10px 14px oklch(0.275 0.038 50 / 0.4));
+    animation-name: swatch-flip-in-back;
   }
 }
 
-@keyframes fabric-roll-forward {
-  to {
-    transform: translateY(14%) scaleY(1.05);
-    filter: brightness(0.82);
-  }
-}
-
-@keyframes fabric-drop-in {
+@keyframes swatch-flip-out-back {
   from {
-    transform: translateY(-100%) scaleY(0.95);
-  }
-  40% {
-    transform: translateY(2%) scaleY(1.01);
+    transform: perspective(1400px) rotateX(0deg);
+    filter: brightness(1);
   }
   to {
-    transform: translateY(0%) scaleY(1);
+    transform: perspective(1400px) rotateX(88deg);
+    filter: brightness(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes swatch-flip-in-back {
+  from {
+    transform: perspective(1400px) rotateX(-88deg);
+    filter: brightness(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(1400px) rotateX(0deg);
+    filter: brightness(1);
+    opacity: 1;
   }
 }
 
