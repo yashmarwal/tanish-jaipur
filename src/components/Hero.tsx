@@ -9,6 +9,24 @@ const WORD_DELAYS = ["0ms", "120ms", "260ms", "400ms"];
 
 export default function Hero() {
   const bg = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const section = useRef<HTMLElement>(null);
+
+  // React does not put the muted attribute in server HTML, which can make browsers refuse autoplay,
+  // so set it and start playback here. Playback pauses while the hero is off screen (saves CPU/battery,
+  // keeps the rest of the page smooth) and never starts under reduced motion.
+  useEffect(() => {
+    const v = video.current;
+    const s = section.current;
+    if (!v || !s || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    v.muted = true;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    });
+    io.observe(s);
+    return () => io.disconnect();
+  }, []);
 
   // Subtle parallax: the fabric drifts at a quarter of scroll speed. Transform only, one write per frame.
   useEffect(() => {
@@ -30,26 +48,33 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="grain relative min-h-svh overflow-hidden pt-16 lg:pt-20 bg-background">
-      {/* Rajasthani fabric background: animated WebP (one variant per viewport), still for reduced motion */}
+    <section ref={section} className="grain relative min-h-svh overflow-hidden pt-16 lg:pt-20 bg-background">
+      {/* Rajasthani fabric background: muted looping H.264 video at the original GIF's 14 fps (hardware
+          decoded, no lag). The still is the poster and the only thing shown under reduced motion. */}
       <div ref={bg} aria-hidden className="parallax absolute inset-x-0 -top-[12%] -bottom-[4%] z-0">
-        <picture>
-          <source
-            media="(prefers-reduced-motion: reduce)"
-            srcSet="/header-bg-still.webp"
-            type="image/webp"
-          />
-          <source media="(max-width: 767px)" srcSet="/header-bg-sm.webp" type="image/webp" />
-          <img
-            src="/header-bg.webp"
-            alt=""
-            width={400}
-            height={424}
-            fetchPriority="high"
-            decoding="async"
-            className="h-full w-full object-cover opacity-[0.6] mix-blend-multiply"
-          />
-        </picture>
+        <video
+          ref={video}
+          className="hero-video h-full w-full object-cover opacity-[0.6] mix-blend-multiply"
+          poster="/header-bg-still.webp"
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="auto"
+          width={400}
+          height={424}
+          tabIndex={-1}
+        >
+          <source src="/header-bg.mp4" type="video/mp4" />
+        </video>
+        <img
+          className="hero-still h-full w-full object-cover opacity-[0.6] mix-blend-multiply"
+          src="/header-bg-still.webp"
+          alt=""
+          width={400}
+          height={424}
+          decoding="async"
+        />
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
 

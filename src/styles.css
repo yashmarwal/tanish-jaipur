@@ -608,3 +608,16 @@ html.lenis [data-lenis-prevent] {
 .craft-wrap {
   --craft-gap: clamp(5rem, 12vw, 9rem);
 }
+
+/* Hero media: video normally; the still replaces it when the visitor asks for reduced motion. */
+.hero-still {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+  .hero-still {
+    display: block;
+  }
+}
