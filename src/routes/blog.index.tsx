@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import { POSTS } from "@/lib/posts";
+import { POSTS, readMinutes } from "@/lib/posts";
 import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog/")({
@@ -38,12 +38,17 @@ function BlogIndex() {
                 <img
                   src={p.coverImage}
                   alt={p.title}
-                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div className="p-7">
-                <div className="text-xs uppercase tracking-wider text-accent">{p.category}</div>
+                <div className="tabular text-xs uppercase tracking-wider text-accent">
+                  {p.category} · {readMinutes(p)} min read
+                </div>
                 <h2 className="font-display text-3xl text-primary mt-2 group-hover:text-accent transition-colors">
                   {p.title}
                 </h2>

@@ -9,6 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WholesaleRouteImport } from './routes/wholesale'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ManufacturingRouteImport } from './routes/manufacturing'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FactoryVisitRouteImport } from './routes/factory-visit'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
@@ -17,6 +22,31 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const WholesaleRoute = WholesaleRouteImport.update({
+  id: '/wholesale',
+  path: '/wholesale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManufacturingRoute = ManufacturingRouteImport.update({
+  id: '/manufacturing',
+  path: '/manufacturing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FactoryVisitRoute = FactoryVisitRouteImport.update({
   id: '/factory-visit',
   path: '/factory-visit',
@@ -59,6 +89,11 @@ export interface FileRoutesByFullPath {
   '/catalogue': typeof CatalogueRoute
   '/contact': typeof ContactRoute
   '/factory-visit': typeof FactoryVisitRoute
+  '/faq': typeof FaqRoute
+  '/manufacturing': typeof ManufacturingRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/wholesale': typeof WholesaleRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -68,6 +103,11 @@ export interface FileRoutesByTo {
   '/catalogue': typeof CatalogueRoute
   '/contact': typeof ContactRoute
   '/factory-visit': typeof FactoryVisitRoute
+  '/faq': typeof FaqRoute
+  '/manufacturing': typeof ManufacturingRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/wholesale': typeof WholesaleRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -78,6 +118,11 @@ export interface FileRoutesById {
   '/catalogue': typeof CatalogueRoute
   '/contact': typeof ContactRoute
   '/factory-visit': typeof FactoryVisitRoute
+  '/faq': typeof FaqRoute
+  '/manufacturing': typeof ManufacturingRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/wholesale': typeof WholesaleRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -89,6 +134,11 @@ export interface FileRouteTypes {
     | '/catalogue'
     | '/contact'
     | '/factory-visit'
+    | '/faq'
+    | '/manufacturing'
+    | '/privacy'
+    | '/terms'
+    | '/wholesale'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +148,11 @@ export interface FileRouteTypes {
     | '/catalogue'
     | '/contact'
     | '/factory-visit'
+    | '/faq'
+    | '/manufacturing'
+    | '/privacy'
+    | '/terms'
+    | '/wholesale'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -107,6 +162,11 @@ export interface FileRouteTypes {
     | '/catalogue'
     | '/contact'
     | '/factory-visit'
+    | '/faq'
+    | '/manufacturing'
+    | '/privacy'
+    | '/terms'
+    | '/wholesale'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -117,12 +177,52 @@ export interface RootRouteChildren {
   CatalogueRoute: typeof CatalogueRoute
   ContactRoute: typeof ContactRoute
   FactoryVisitRoute: typeof FactoryVisitRoute
+  FaqRoute: typeof FaqRoute
+  ManufacturingRoute: typeof ManufacturingRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
+  WholesaleRoute: typeof WholesaleRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wholesale': {
+      id: '/wholesale'
+      path: '/wholesale'
+      fullPath: '/wholesale'
+      preLoaderRoute: typeof WholesaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing': {
+      id: '/manufacturing'
+      path: '/manufacturing'
+      fullPath: '/manufacturing'
+      preLoaderRoute: typeof ManufacturingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/factory-visit': {
       id: '/factory-visit'
       path: '/factory-visit'
@@ -181,6 +281,11 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogueRoute: CatalogueRoute,
   ContactRoute: ContactRoute,
   FactoryVisitRoute: FactoryVisitRoute,
+  FaqRoute: FaqRoute,
+  ManufacturingRoute: ManufacturingRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
+  WholesaleRoute: WholesaleRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

@@ -59,6 +59,8 @@ export const getRouter = () => {
     routeTree,
     context: {},
     scrollRestoration: true,
+    // Cross-dissolve between pages, only when the path really changes (not for ?category / ?design).
+    defaultViewTransition: { types: ({ pathChanged }) => (pathChanged ? ["page"] : false) },
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
   });

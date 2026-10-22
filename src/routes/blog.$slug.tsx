@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPost, POSTS } from "@/lib/posts";
-import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
+import { getPost, POSTS, readMinutes } from "@/lib/posts";
+import { blogPostingSchema, breadcrumbSchema, buildPageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -20,11 +20,14 @@ export const Route = createFileRoute("/blog/$slug")({
       type: "article",
       keywords: post.keywords,
       image: post.coverImage,
-      jsonLd: breadcrumbSchema([
-        { name: "Home", path: "/" },
-        { name: "Journal", path: "/blog" },
-        { name: post.title, path: `/blog/${post.slug}` },
-      ]),
+      jsonLd: [
+        blogPostingSchema(post),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Journal", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]),
+      ],
     });
   },
   notFoundComponent: () => (
@@ -52,15 +55,36 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function BlogPost() {
   const { post } = Route.useLoaderData();
+  const at = POSTS.findIndex((p) => p.slug === post.slug);
+  const prev = POSTS[(at - 1 + POSTS.length) % POSTS.length];
+  const next = POSTS[(at + 1) % POSTS.length];
   const others = POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
 
   return (
     <article className="bg-background">
       <header className="relative pt-32 lg:pt-44 pb-20 overflow-hidden">
-        <img src={post.coverImage} alt="" className="absolute inset-0 w-full h-full object-cover z-0 opacity-40" />
-        <div className="absolute inset-0 bg-background/75 backdrop-blur-lg z-0" />
+        <img
+          src={post.coverImage}
+          alt=""
+          width={1024}
+          height={1024}
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-40"
+        />
+        <div className="absolute inset-0 bg-background/80 z-0" />
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">{post.category}</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">
+            {post.category} ·{" "}
+            <time dateTime={post.date}>
+              {new Date(post.date).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                timeZone: "UTC",
+              })}
+            </time>{" "}
+            · <span className="tabular">{readMinutes(post)} min read</span>
+          </p>
           <h1 className="font-display text-4xl lg:text-7xl text-primary leading-[1] text-balance">
             {post.title}
           </h1>
@@ -110,14 +134,43 @@ function BlogPost() {
             if (block.type === "image") {
               return (
                 <figure key={i} className="my-10">
-                  <img src={block.src} alt={block.alt} className="w-full rounded-2xl object-cover shadow-soft" />
-                  {block.caption && <figcaption className="text-center text-sm text-foreground/60 mt-3">{block.caption}</figcaption>}
+                  <img
+                    src={block.src}
+                    alt={block.alt}
+                    width={1024}
+                    height={1024}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full rounded-2xl object-cover shadow-soft"
+                  />
+                  {block.caption && (
+                    <figcaption className="text-center text-sm text-foreground/60 mt-3">
+                      {block.caption}
+                    </figcaption>
+                  )}
                 </figure>
               );
             }
             return null;
           })}
         </div>
+
+        <nav aria-label="More articles" className="mt-16 grid gap-3 sm:grid-cols-2">
+          {[
+            { p: prev, label: "← Previous" },
+            { p: next, label: "Next →" },
+          ].map(({ p, label }, i) => (
+            <Link
+              key={label}
+              to="/blog/$slug"
+              params={{ slug: p.slug }}
+              className={`press rounded-2xl border border-border bg-card p-5 hover:border-accent ${i === 1 ? "sm:text-right" : ""}`}
+            >
+              <span className="text-xs tracking-wider text-accent uppercase">{label}</span>
+              <span className="font-display mt-1 block text-xl text-primary">{p.title}</span>
+            </Link>
+          ))}
+        </nav>
 
         <hr className="my-16 border-border" />
 
