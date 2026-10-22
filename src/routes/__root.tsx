@@ -5,12 +5,11 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SmoothScroll from "@/components/SmoothScroll";
 import ExitIntent from "@/components/ExitIntent";
-import StickyCta from "@/components/StickyCta";
+import Dock from "@/components/Dock";
+import ChatWidget from "@/components/ChatWidget";
 import { IntroProvider } from "@/components/Preloader";
 import { SITE, organizationSchema } from "@/lib/seo";
-
-const SITE_URL = SITE.url;
-const JSON_LD = organizationSchema;
+import { SECURITY_HEADERS } from "@/lib/security";
 
 function NotFoundComponent() {
   return (
@@ -34,49 +33,44 @@ function NotFoundComponent() {
   );
 }
 
+// Page-level title, description, canonical and OG come from each route's buildPageHead();
+// only site-wide tags live here, so no route inherits another route's canonical.
 export const Route = createRootRoute({
+  headers: () => SECURITY_HEADERS,
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Tanish Creation | Screen Printing Manufacturer Jaipur" },
-      {
-        name: "description",
-        content:
-          "Jaipur-based premium screen printing fabric manufacturer. 20000+ designs, bulk orders from 500 metres. 65+ years of heritage.",
-      },
-      {
-        name: "keywords",
-        content:
-          "screen printing Jaipur, fabric printing manufacturer India, bulk fabric printing, Sanganer prints, screen print fabric supplier",
-      },
-      { name: "author", content: "Tanish Creation" },
-      { property: "og:title", content: "Tanish Creation | Screen Printing Manufacturer Jaipur" },
-      {
-        property: "og:description",
-        content: "Premium screen printed fabrics from Jaipur. 20000+ designs, bulk from 500 metres.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: SITE_URL },
-      { property: "og:site_name", content: "Tanish Creation" },
-      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { title: SITE.name },
+      { name: "author", content: SITE.name },
+      { name: "theme-color", content: "#FAF6F1" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { property: "og:locale", content: "en_IN" },
     ],
     links: [
-      { rel: "icon", type: "image/jpeg", href: "/favicon.jpg" },
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48.png" },
+      { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap",
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/cormorant-normal.woff2",
+        crossOrigin: "anonymous",
       },
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/inter.woff2",
+        crossOrigin: "anonymous",
+      },
+      { rel: "stylesheet", href: appCss },
     ],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(JSON_LD),
+        children: JSON.stringify(organizationSchema),
       },
     ],
   }),
@@ -100,7 +94,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
           }}
         />
         <noscript>
-          <style>{".intro-overlay{display:none!important}html.intro-playing{overflow:auto!important}"}</style>
+          <style>
+            {".intro-overlay{display:none!important}html.intro-playing{overflow:auto!important}"}
+          </style>
         </noscript>
       </head>
       <body>
@@ -121,7 +117,8 @@ function RootComponent() {
       </main>
       <Footer />
       <FloatingWhatsApp />
-      <StickyCta />
+      <ChatWidget />
+      <Dock />
       <ExitIntent />
     </IntroProvider>
   );

@@ -1,8 +1,4 @@
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
   {
@@ -32,60 +28,71 @@ const STEPS = [
   },
 ];
 
+/**
+ * Horizontal "pinned" walk through the five steps, built on position: sticky (no JS pinning, so
+ * no layout shift). The outer block is 100svh + the distance the track has to travel; scroll
+ * progress through that distance maps to translateX. The initial height comes from CSS
+ * (.process-outer) so it already matches before hydration.
+ */
 export default function Process() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const outer = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !trackRef.current) return;
-    const ctx = gsap.context(() => {
-      const track = trackRef.current!;
-      const distance = track.scrollWidth - window.innerWidth + 80;
-      gsap.to(track, {
-        x: -distance,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: () => `+=${distance}`,
-          scrub: 1,
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
+    const o = outer.current;
+    const t = track.current;
+    if (!o || !t) return;
+    let dist = 0;
+    let raf = 0;
+    const measure = () => {
+      dist = Math.max(0, t.scrollWidth - window.innerWidth + 80);
+      o.style.setProperty("--dist", `${dist}px`);
+      draw();
+    };
+    const draw = () => {
+      raf = 0;
+      const p = dist ? Math.min(1, Math.max(0, -o.getBoundingClientRect().top / dist)) : 0;
+      t.style.transform = `translate3d(${-p * dist}px, 0, 0)`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(draw);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(t);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
-    <div ref={containerRef}>
-      <section
-        ref={sectionRef}
-        className="relative bg-primary text-primary-foreground overflow-hidden"
-      >
-        <div className="h-screen flex flex-col justify-center">
-          <div className="px-6 lg:px-10 max-w-7xl mx-auto w-full mb-10">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4">The Process</p>
-            <h2 className="font-display text-4xl lg:text-6xl text-balance">
-              Five steps from your <em className="text-accent">brief</em> to your{" "}
-              <em className="italic">box</em>.
-            </h2>
-          </div>
-          <div ref={trackRef} className="flex gap-6 px-6 lg:px-10 pl-[10vw]">
-            {STEPS.map((s) => (
-              <div
-                key={s.n}
-                className="shrink-0 w-[80vw] sm:w-[55vw] lg:w-[40vw] bg-primary-foreground/5 border border-primary-foreground/15 rounded-3xl p-10"
-              >
-                <div className="font-display text-7xl text-accent">{s.n}</div>
-                <h3 className="font-display text-3xl mt-4">{s.title}</h3>
-                <p className="mt-4 text-primary-foreground/75 leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
+    <section ref={outer} className="process-outer relative bg-primary text-primary-foreground">
+      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden">
+        <div className="mx-auto mb-10 w-full max-w-7xl px-6 lg:px-10">
+          <p className="mb-4 text-xs tracking-[0.3em] text-accent uppercase">The Process</p>
+          <h2 className="font-display text-4xl text-balance lg:text-6xl">
+            Five steps from your <em className="text-accent">brief</em> to your{" "}
+            <em className="italic">box</em>.
+          </h2>
         </div>
-      </section>
-    </div>
+        <div ref={track} className="process-track flex w-max gap-6 will-change-transform">
+          {STEPS.map((s) => (
+            <div
+              key={s.n}
+              className="process-card shrink-0 rounded-3xl border border-primary-foreground/15 bg-primary-foreground/5 p-8 lg:p-10"
+            >
+              <div className="font-display tabular text-6xl text-accent lg:text-7xl">{s.n}</div>
+              <h3 className="font-display mt-4 text-3xl">{s.title}</h3>
+              <p className="mt-4 leading-relaxed text-primary-foreground/75">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

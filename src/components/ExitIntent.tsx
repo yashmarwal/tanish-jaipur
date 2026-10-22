@@ -2,43 +2,57 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
 
+const SEEN = "tc_exit";
+
+/**
+ * Factory-visit nudge, shown once per visit: on desktop when the cursor leaves through the top of
+ * the window; on touch devices (no cursor to track) after 10 seconds.
+ */
 export default function ExitIntent() {
   const [show, setShow] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    if (dismissed) return;
-    const onLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !sessionStorage.getItem("tc_exit")) {
-        setShow(true);
-        sessionStorage.setItem("tc_exit", "1");
+    const open = () => {
+      try {
+        if (sessionStorage.getItem(SEEN)) return;
+        sessionStorage.setItem(SEEN, "1");
+      } catch {
+        /* storage blocked: show it, it just may repeat */
       }
+      setShow(true);
     };
+    const onLeave = (e: MouseEvent) => e.clientY <= 0 && open();
     document.addEventListener("mouseleave", onLeave);
-    
-    // Mobile fallback: trigger after 10 seconds
-    const timer = setTimeout(() => {
-      if (!sessionStorage.getItem("tc_exit")) {
-        setShow(true);
-        sessionStorage.setItem("tc_exit", "1");
-      }
-    }, 10000);
-
+    const touch = window.matchMedia("(hover: none)").matches;
+    const timer = touch ? window.setTimeout(open, 10000) : 0;
     return () => {
       document.removeEventListener("mouseleave", onLeave);
       clearTimeout(timer);
     };
-  }, [dismissed]);
+  }, []);
+
+  useEffect(() => {
+    if (!show) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setShow(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [show]);
 
   if (!show) return null;
   return (
-    <div className="fixed inset-0 z-[60] bg-primary/70 backdrop-blur-sm flex items-center justify-center p-4 fade-up">
-      <div className="bg-card rounded-3xl max-w-md w-full p-6 sm:p-8 lg:p-10 shadow-warm relative">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Book a factory visit"
+      className="fixed inset-0 z-[60] bg-primary/70 flex items-center justify-center p-4 fade-up"
+      onClick={() => setShow(false)}
+    >
+      <div
+        className="bg-card rounded-3xl max-w-md w-full p-6 sm:p-8 lg:p-10 shadow-warm relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
-          onClick={() => {
-            setShow(false);
-            setDismissed(true);
-          }}
+          onClick={() => setShow(false)}
           className="absolute top-4 right-4 p-2"
           aria-label="Close"
         >

@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { waLink } from "@/lib/whatsapp";
+import { TERMS } from "@/lib/terms";
 import WhatsApp from "./icons/WhatsApp";
+import { FormStatus, Honeypot, useEnquiry } from "./enquiry";
+
+const field =
+  "w-full min-w-0 bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none";
 
 export default function FactoryVisitForm() {
   const [form, setForm] = useState({
@@ -11,77 +15,89 @@ export default function FactoryVisitForm() {
     visitors: "1",
     message: "",
   });
+  const [hp, setHp] = useState("");
+  const { status, href, send, mail } = useEnquiry("Factory visit request");
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const msg = `🏭 FACTORY VISIT REQUEST\n\nName: ${form.name}\nPhone: ${form.phone}\nCompany: ${form.company}\nDate: ${form.date}\nVisitors: ${form.visitors}\nMessage: ${form.message}`;
-    window.open(waLink(msg), "_blank");
-  };
+  const body = `FACTORY VISIT REQUEST\n\nName: ${form.name}\nPhone: ${form.phone}\nCompany: ${form.company}\nDate: ${form.date}\nVisitors: ${form.visitors}\nMessage: ${form.message}`;
+  const set = (k: keyof typeof form) => (e: { target: { value: string } }) =>
+    setForm({ ...form, [k]: e.target.value });
 
   return (
     <form
-      onSubmit={submit}
-      className="bg-card rounded-3xl p-8 lg:p-10 border border-border shadow-warm space-y-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        send(body, hp);
+      }}
+      className="relative bg-card rounded-3xl p-6 sm:p-8 lg:p-10 border border-border shadow-warm space-y-4"
     >
       <h3 className="font-display text-2xl text-primary">Plan your visit</h3>
+      <Honeypot value={hp} onChange={setHp} />
       <input
         required
         maxLength={120}
         placeholder="Your name"
+        aria-label="Your name"
         value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-        className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none"
+        onChange={set("name")}
+        className={field}
       />
       <div className="grid grid-cols-2 gap-4">
         <input
           required
           maxLength={20}
+          inputMode="tel"
           placeholder="Phone"
+          aria-label="Phone"
           value={form.phone}
-          onChange={(e) => setForm({ ...form, phone: e.target.value })}
-          className="bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none"
+          onChange={set("phone")}
+          className={field}
         />
         <input
           maxLength={120}
           placeholder="Company"
+          aria-label="Company"
           value={form.company}
-          onChange={(e) => setForm({ ...form, company: e.target.value })}
-          className="bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none"
+          onChange={set("company")}
+          className={field}
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <input
           required
           type="date"
+          aria-label="Visit date"
           value={form.date}
-          onChange={(e) => setForm({ ...form, date: e.target.value })}
-          className="bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none"
+          onChange={set("date")}
+          className={field}
         />
         <input
           required
           type="number"
           min={1}
-          max={20}
+          max={TERMS.maxVisitors}
           value={form.visitors}
-          onChange={(e) => setForm({ ...form, visitors: e.target.value })}
+          onChange={set("visitors")}
           placeholder="Visitors"
-          className="bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none"
+          aria-label="Number of visitors"
+          className={field}
         />
       </div>
       <textarea
         maxLength={500}
         rows={3}
         placeholder="Anything specific you'd like to see?"
+        aria-label="Message"
         value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
-        className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm focus:border-accent outline-none resize-none"
+        onChange={set("message")}
+        className={`${field} resize-none`}
       />
       <button
         type="submit"
-        className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium hover:bg-primary/90 transition-all inline-flex items-center justify-center gap-2"
+        className="press w-full bg-primary text-primary-foreground py-4 rounded-full font-medium hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2"
       >
         <WhatsApp className="h-4 w-4" /> Confirm via WhatsApp
       </button>
+      <FormStatus status={status} href={href} mailHref={mail(body)} />
     </form>
   );
 }

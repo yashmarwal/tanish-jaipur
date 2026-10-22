@@ -1,4 +1,5 @@
 import { EMAIL, INSTAGRAM, PHONE_DISPLAY, WHATSAPP_NUMBER } from "./whatsapp";
+import { TERMS, fmtNum } from "./terms";
 
 export const SITE = {
   name: "Tanish Creation",
@@ -63,25 +64,101 @@ export function buildPageHead({
   };
 }
 
+const ID = {
+  org: `${SITE.url}/#organization`,
+  site: `${SITE.url}/#website`,
+};
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": ID.org,
   name: SITE.name,
   slogan: SITE.tagline,
   url: SITE.url,
+  logo: `${SITE.url}/icon-512.png`,
+  image: `${SITE.url}/og-image.jpg`,
   telephone: SITE.phoneDisplay,
   email: SITE.email,
-  foundingDate: "1959",
-  description:
-    "Jaipur-based premium screen printing fabric manufacturer. 20000+ designs, bulk orders from 500 metres, 65+ years of Sanganer heritage.",
+  foundingDate: String(TERMS.since),
+  description: `Jaipur-based premium screen printing fabric manufacturer. ${fmtNum(TERMS.designs)}+ designs, bulk orders from ${TERMS.minMetres} metres, 65+ years of Sanganer heritage.`,
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Ward No. 36, Saipura, behind Homeopathic University, Sanganer",
     addressLocality: "Jaipur",
     addressRegion: "Rajasthan",
+    postalCode: "302029",
     addressCountry: "IN",
   },
   sameAs: [SITE.instagram],
 };
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": ID.site,
+  url: SITE.url,
+  name: SITE.name,
+  inLanguage: "en",
+  publisher: { "@id": ID.org },
+};
+
+export const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Screen printing and bulk fabric printing",
+  provider: { "@id": ID.org },
+  areaServed: "IN",
+  description: `Hand-pulled screen printing on ${TERMS.fabrics}. Custom designs and bulk orders from ${TERMS.minMetres} metres.`,
+};
+
+export function faqSchema(items: readonly { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((i) => ({
+      "@type": "Question",
+      name: i.q,
+      acceptedAnswer: { "@type": "Answer", text: i.a },
+    })),
+  };
+}
+
+export function itemListSchema(designs: { name: string; imageUrl: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Screen printed fabric designs",
+    numberOfItems: designs.length,
+    itemListElement: designs.map((d, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: d.name,
+      image: `${SITE.url}${d.imageUrl}`,
+    })),
+  };
+}
+
+export function blogPostingSchema(p: {
+  title: string;
+  excerpt: string;
+  slug: string;
+  date: string;
+  coverImage: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: p.title,
+    description: p.excerpt,
+    image: `${SITE.url}${p.coverImage}`,
+    datePublished: p.date,
+    dateModified: p.date,
+    mainEntityOfPage: `${SITE.url}/blog/${p.slug}`,
+    author: { "@id": ID.org },
+    publisher: { "@id": ID.org },
+  };
+}
 
 export function breadcrumbSchema(items: { name: string; path: string }[]) {
   return {

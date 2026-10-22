@@ -4,6 +4,29 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Self-hosted fonts (latin subset). Variable files cover every weight used. */
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/inter.woff2") format("woff2");
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -99,13 +122,15 @@
     border-color: var(--color-border);
   }
   html {
-    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
     overflow-x: hidden;
   }
   h1,
@@ -395,5 +420,204 @@ html.menu-open .sticky-dock {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Upgrade layer: numerals, touch, page transitions, dock, nav, reveals
+ * ------------------------------------------------------------------------- */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+.tabular {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings:
+    "lnum" 1,
+    "tnum" 1;
+}
+
+:root {
+  /* Height the mobile dock occupies; the footer reserves exactly this. */
+  --dock-h: 4.25rem;
+  --dock-gap: max(0.75rem, env(safe-area-inset-bottom));
+  --dock-space: calc(var(--dock-h) + var(--dock-gap) + 0.75rem);
+}
+
+/* Pure cross-dissolve: the old page stays opaque, the new one fades in over it. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation-duration: 0.38s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  animation-name: vt-fade-in;
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+/* Fixed chrome lives in its own layer so it never fades or doubles during the dissolve. */
+.vt-nav {
+  view-transition-name: site-nav;
+}
+.vt-dock {
+  view-transition-name: site-dock;
+}
+.vt-orb {
+  view-transition-name: site-orb;
+}
+.vt-chat {
+  view-transition-name: site-chat;
+}
+.vt-wa {
+  view-transition-name: site-wa;
+}
+::view-transition-group(site-nav),
+::view-transition-group(site-dock),
+::view-transition-group(site-orb),
+::view-transition-group(site-chat),
+::view-transition-group(site-wa) {
+  animation: none;
+}
+::view-transition-old(site-nav),
+::view-transition-old(site-dock),
+::view-transition-old(site-orb),
+::view-transition-old(site-chat),
+::view-transition-old(site-wa) {
+  display: none;
+}
+::view-transition-new(site-nav),
+::view-transition-new(site-dock),
+::view-transition-new(site-orb),
+::view-transition-new(site-chat),
+::view-transition-new(site-wa) {
+  animation: none;
+}
+
+/* Mobile dock: tucks away while scrolling, returns when idle. */
+.dock {
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
+}
+html.is-scrolling .dock {
+  transform: translate3d(0, calc(100% + 1.5rem), 0);
+  opacity: 0;
+  pointer-events: none;
+}
+html.menu-open .dock {
+  opacity: 0;
+  pointer-events: none;
+}
+.press {
+  transition: transform 0.15s ease;
+}
+.press:active {
+  transform: scale(0.94);
+}
+
+/* Soft light sweep across a pill on hover (pointer devices only). */
+.sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: oklch(1 0 0 / 28%);
+  transform: translate3d(-110%, 0, 0) skewX(-14deg);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) {
+  .sweep:hover::before {
+    transform: translate3d(110%, 0, 0) skewX(-14deg);
+  }
+}
+
+/* Rule that draws in once. */
+.draw-rule {
+  transform-origin: left center;
+}
+
+/* Hero background parallax layer. */
+.parallax {
+  will-change: transform;
+}
+
+/* Scroll-snap rail used by the featured carousel. */
+.snap-rail {
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+.snap-rail > * {
+  scroll-snap-align: start;
+}
+
+/* Lenis owns wheel scrolling; let native scroll-snap rails keep native touch scroll. */
+html.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Stacking-cards section: own stacking context so card z-indexes stay inside it. */
+.craft-wrap {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+.craft-wrap + * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Process walk: outer height = viewport + travel distance, known from CSS before JS runs. */
+.process-outer {
+  --cw: 80vw;
+  --padr: 1.5rem;
+  --dist: calc(5 * var(--cw) + 4 * 1.5rem + 10vw + var(--padr) - 100vw + 80px);
+  height: calc(100svh + var(--dist));
+}
+.process-track {
+  padding-left: 10vw;
+  padding-right: var(--padr);
+}
+.process-card {
+  width: var(--cw);
+}
+@media (min-width: 640px) {
+  .process-outer {
+    --cw: 55vw;
+  }
+}
+@media (min-width: 1024px) {
+  .process-outer {
+    --cw: 40vw;
+    --padr: 2.5rem;
+  }
+}
+
+/* Clear space between the last stacking card and whatever follows it. */
+.craft-wrap {
+  --craft-gap: clamp(5rem, 12vw, 9rem);
+}
+
+/* Hero media: video normally; the still replaces it when the visitor asks for reduced motion. */
+.hero-still {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+  .hero-still {
+    display: block;
   }
 }

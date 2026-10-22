@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EMAIL, INSTAGRAM, PHONE_DISPLAY, waLink } from "@/lib/whatsapp";
+import { EMAIL, INSTAGRAM, PHONE_DISPLAY, TEL, waLink } from "@/lib/whatsapp";
 import { breadcrumbSchema, buildPageHead } from "@/lib/seo";
 import { Phone, Mail, MapPin, Instagram } from "lucide-react";
 import WhatsApp from "@/components/icons/WhatsApp";
@@ -21,11 +21,15 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const items = [
-    { I: Phone, k: "Call", v: PHONE_DISPLAY, href: `tel:+918302430391` },
+    { I: Phone, k: "Call", v: PHONE_DISPLAY, href: TEL },
     { I: WhatsApp, k: "WhatsApp", v: PHONE_DISPLAY, href: waLink("Hi Tanish Creation!") },
     { I: Mail, k: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
     { I: Instagram, k: "Instagram", v: "@tanishcreation.co", href: INSTAGRAM },
-    { I: MapPin, k: "Location", v: "Ward no 36 saipura sanganer jaipur behind the homeopathic university" },
+    {
+      I: MapPin,
+      k: "Location",
+      v: "Ward No. 36, Saipura, behind Homeopathic University, Sanganer, Jaipur (Rajasthan) 302029",
+    },
   ];
   return (
     <section className="pt-32 lg:pt-44 pb-24 bg-gradient-cream">
