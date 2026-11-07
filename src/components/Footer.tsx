@@ -4,6 +4,7 @@ import { LEGAL_LINKS, NAV_LINKS, NAV_MORE } from "@/lib/nav";
 import { TERMS } from "@/lib/terms";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import WhatsApp from "./icons/WhatsApp";
+import PhaselineCredit from "./PhaselineCredit";
 
 const social =
   "press flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 text-primary-foreground/80 transition-colors hover:border-accent hover:text-accent";
@@ -110,24 +111,11 @@ export default function Footer() {
             ))}
           </ul>
           <p>Crafted in Jaipur • Since {TERMS.since}</p>
+          <PhaselineCredit />
         </div>
       </div>
       {/* Reserves exactly the mobile dock's height so nothing ends up hidden beneath it */}
-      <div className="border-t border-primary-foreground/10 pb-[var(--dock-space)] md:pb-0">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-3 text-center text-xs text-primary-foreground/50">
-          <p>
-            Built by{" "}
-            <a
-              href="https://wa.me/918595475007?text=Hello%2C%20I%E2%80%99m%20interested%20in%20developing%20a%20website."
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-accent"
-            >
-              Phaseline
-            </a>
-          </p>
-        </div>
-      </div>
+      <div className="pb-[var(--dock-space)] md:pb-0" aria-hidden="true" />
     </footer>
   );
 }
